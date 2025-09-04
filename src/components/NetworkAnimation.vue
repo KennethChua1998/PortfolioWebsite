@@ -14,11 +14,11 @@ let nodeGeometry, nodeMaterial
 let mousePosition = { x: 0, y: 0 }
 
 const config = {
-  nodeCount: 100,
-  maxDistance: 150,
+  nodeCount: 80,
+  maxDistance: 120,
   nodeColor: 0x00ff88,
   connectionColor: 0x00cc66,
-  nodeSize: 3,
+  nodeSize: 2,
   animationSpeed: 0.5,
   mouseInfluence: 100
 }

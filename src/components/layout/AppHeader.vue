@@ -1,16 +1,16 @@
 <template>
-  <header class="fixed top-0 w-full z-50 bg-slate-950/80 backdrop-blur-md border-b border-gray-800">
+  <header class="fixed top-0 w-full z-50 glass-section">
     <nav class="section-container py-4">
       <div class="flex items-center justify-between">
         <div class="text-xl font-bold text-emerald-400">
           KC
         </div>
         
-        <ul class="hidden md:flex space-x-8">
+        <ul class="hidden md:flex space-x-2">
           <li v-for="item in navItems" :key="item.label">
             <a 
               :href="item.href"
-              class="text-gray-300 hover:text-emerald-400 transition-colors duration-200"
+              class="glass-card px-4 py-2 rounded-lg text-gray-300 hover:text-emerald-400 transition-all duration-300 glass-hover"
               @click="smoothScroll"
             >
               {{ item.label }}
@@ -20,7 +20,7 @@
         
         <button 
           @click="toggleMobileMenu"
-          class="md:hidden text-gray-300 hover:text-gray-50"
+          class="md:hidden glass-card p-2 rounded-lg text-gray-300 hover:text-emerald-400 transition-all duration-300 glass-hover"
         >
           <Menu :size="24" />
         </button>
@@ -32,7 +32,7 @@
           <li v-for="item in navItems" :key="item.label">
             <a 
               :href="item.href"
-              class="block py-2 text-gray-300 hover:text-emerald-400 transition-colors duration-200"
+              class="glass-card block px-4 py-3 rounded-lg text-gray-300 hover:text-emerald-400 transition-all duration-300 glass-hover"
               @click="closeMobileMenu"
             >
               {{ item.label }}

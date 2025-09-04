@@ -1,5 +1,5 @@
 <template>
-  <section id="skills" class="py-20 glass-section relative overflow-hidden">
+  <section id="skills" class="py-20 glass-section relative overflow-hidden" ref="skillsSection">
     <div class="container mx-auto px-6">
       <div class="max-w-6xl mx-auto">
         <h2 class="text-4xl font-bold text-center mb-16 text-emerald-400">
@@ -10,19 +10,19 @@
           <!-- Cloud & DevOps -->
           <div class="skill-category">
             <div class="flex items-center mb-4">
-              <Cloud :size="24" class="text-emerald-400 mr-3" />
+              <Cloud :size="24" class="text-blue-400 mr-3" />
               <h3 class="text-xl font-semibold text-white">Cloud & DevOps</h3>
             </div>
             <div class="space-y-3">
               <div v-for="skill in cloudSkills" :key="skill.name" class="skill-item">
                 <div class="flex justify-between mb-1">
                   <span class="text-gray-300">{{ skill.name }}</span>
-                  <span class="text-emerald-400">{{ skill.level }}%</span>
+                  <span :class="getSkillColor(skill.level, 'cloud').text">{{ animatedSkills[skill.name] || 0 }}%</span>
                 </div>
                 <div class="w-full bg-gray-700 rounded-full h-2">
                   <div 
-                    class="bg-gradient-to-r from-emerald-500 to-emerald-400 h-2 rounded-full transition-all duration-1000"
-                    :style="{ width: skill.level + '%' }"
+                    :class="`bg-gradient-to-r ${getSkillColor(skill.level, 'cloud').bg} h-2 rounded-full transition-all duration-1000`"
+                    :style="{ width: (animatedSkills[skill.name] || 0) + '%' }"
                   ></div>
                 </div>
               </div>
@@ -32,19 +32,19 @@
           <!-- Programming -->
           <div class="skill-category">
             <div class="flex items-center mb-4">
-              <Code :size="24" class="text-green-400 mr-3" />
+              <Code :size="24" class="text-emerald-400 mr-3" />
               <h3 class="text-xl font-semibold text-white">Programming</h3>
             </div>
             <div class="space-y-3">
               <div v-for="skill in programmingSkills" :key="skill.name" class="skill-item">
                 <div class="flex justify-between mb-1">
                   <span class="text-gray-300">{{ skill.name }}</span>
-                  <span class="text-green-400">{{ skill.level }}%</span>
+                  <span :class="getSkillColor(skill.level, 'programming').text">{{ animatedSkills[skill.name] || 0 }}%</span>
                 </div>
                 <div class="w-full bg-gray-700 rounded-full h-2">
                   <div 
-                    class="bg-gradient-to-r from-green-500 to-emerald-500 h-2 rounded-full transition-all duration-1000"
-                    :style="{ width: skill.level + '%' }"
+                    :class="`bg-gradient-to-r ${getSkillColor(skill.level, 'programming').bg} h-2 rounded-full transition-all duration-1000`"
+                    :style="{ width: (animatedSkills[skill.name] || 0) + '%' }"
                   ></div>
                 </div>
               </div>
@@ -54,19 +54,19 @@
           <!-- Frontend -->
           <div class="skill-category">
             <div class="flex items-center mb-4">
-              <Monitor :size="24" class="text-emerald-400 mr-3" />
+              <Monitor :size="24" class="text-purple-400 mr-3" />
               <h3 class="text-xl font-semibold text-white">Frontend</h3>
             </div>
             <div class="space-y-3">
               <div v-for="skill in frontendSkills" :key="skill.name" class="skill-item">
                 <div class="flex justify-between mb-1">
                   <span class="text-gray-300">{{ skill.name }}</span>
-                  <span class="text-emerald-400">{{ skill.level }}%</span>
+                  <span :class="getSkillColor(skill.level, 'frontend').text">{{ animatedSkills[skill.name] || 0 }}%</span>
                 </div>
                 <div class="w-full bg-gray-700 rounded-full h-2">
                   <div 
-                    class="bg-gradient-to-r from-emerald-600 to-emerald-500 h-2 rounded-full transition-all duration-1000"
-                    :style="{ width: skill.level + '%' }"
+                    :class="`bg-gradient-to-r ${getSkillColor(skill.level, 'frontend').bg} h-2 rounded-full transition-all duration-1000`"
+                    :style="{ width: (animatedSkills[skill.name] || 0) + '%' }"
                   ></div>
                 </div>
               </div>
@@ -76,19 +76,19 @@
           <!-- Tools & Workflow -->
           <div class="skill-category">
             <div class="flex items-center mb-4">
-              <Settings :size="24" class="text-orange-400 mr-3" />
+              <Settings :size="24" class="text-amber-400 mr-3" />
               <h3 class="text-xl font-semibold text-white">Tools & Workflow</h3>
             </div>
             <div class="space-y-3">
               <div v-for="skill in toolsSkills" :key="skill.name" class="skill-item">
                 <div class="flex justify-between mb-1">
                   <span class="text-gray-300">{{ skill.name }}</span>
-                  <span class="text-orange-400">{{ skill.level }}%</span>
+                  <span :class="getSkillColor(skill.level, 'tools').text">{{ animatedSkills[skill.name] || 0 }}%</span>
                 </div>
                 <div class="w-full bg-gray-700 rounded-full h-2">
                   <div 
-                    class="bg-gradient-to-r from-orange-500 to-red-500 h-2 rounded-full transition-all duration-1000"
-                    :style="{ width: skill.level + '%' }"
+                    :class="`bg-gradient-to-r ${getSkillColor(skill.level, 'tools').bg} h-2 rounded-full transition-all duration-1000`"
+                    :style="{ width: (animatedSkills[skill.name] || 0) + '%' }"
                   ></div>
                 </div>
               </div>
@@ -118,7 +118,109 @@
 </template>
 
 <script setup>
+import { ref, onMounted } from 'vue'
 import { Cloud, Code, Monitor, Settings, Award } from 'lucide-vue-next'
+
+const skillsSection = ref(null)
+const animatedSkills = ref({})
+const isVisible = ref(false)
+
+// Different color schemes for each category
+const getSkillColor = (level, category) => {
+  const colorSchemes = {
+    cloud: {
+      90: { text: 'text-blue-300', bg: 'from-blue-400 to-cyan-400' },
+      85: { text: 'text-blue-400', bg: 'from-blue-500 to-cyan-500' },
+      80: { text: 'text-cyan-400', bg: 'from-blue-600 to-cyan-600' },
+      75: { text: 'text-cyan-500', bg: 'from-cyan-600 to-blue-700' },
+      default: { text: 'text-cyan-600', bg: 'from-cyan-700 to-blue-800' }
+    },
+    programming: {
+      90: { text: 'text-emerald-300', bg: 'from-emerald-400 to-green-400' },
+      85: { text: 'text-emerald-400', bg: 'from-emerald-500 to-green-500' },
+      80: { text: 'text-green-400', bg: 'from-emerald-600 to-green-600' },
+      75: { text: 'text-green-500', bg: 'from-green-600 to-emerald-700' },
+      default: { text: 'text-green-600', bg: 'from-green-700 to-emerald-800' }
+    },
+    frontend: {
+      90: { text: 'text-purple-300', bg: 'from-purple-400 to-pink-400' },
+      85: { text: 'text-purple-400', bg: 'from-purple-500 to-pink-500' },
+      80: { text: 'text-pink-400', bg: 'from-purple-600 to-pink-600' },
+      75: { text: 'text-pink-500', bg: 'from-pink-600 to-purple-700' },
+      default: { text: 'text-pink-600', bg: 'from-pink-700 to-purple-800' }
+    },
+    tools: {
+      90: { text: 'text-amber-300', bg: 'from-amber-400 to-orange-400' },
+      85: { text: 'text-amber-400', bg: 'from-amber-500 to-orange-500' },
+      80: { text: 'text-orange-400', bg: 'from-amber-600 to-orange-600' },
+      75: { text: 'text-orange-500', bg: 'from-orange-600 to-amber-700' },
+      default: { text: 'text-orange-600', bg: 'from-orange-700 to-amber-800' }
+    }
+  }
+  
+  const scheme = colorSchemes[category] || colorSchemes.programming
+  if (level >= 90) return scheme[90]
+  if (level >= 85) return scheme[85]
+  if (level >= 80) return scheme[80]
+  if (level >= 75) return scheme[75]
+  return scheme.default
+}
+
+// Animate skill percentages on scroll
+const animateSkills = () => {
+  const skills = [...cloudSkills, ...programmingSkills, ...frontendSkills, ...toolsSkills]
+  
+  skills.forEach((skill, index) => {
+    const startTime = Date.now() + (index * 50) // Faster stagger - 50ms instead of 100ms
+    const duration = 1200 // Faster - 1.2 seconds instead of 2
+    
+    const animate = () => {
+      const elapsed = Date.now() - startTime
+      const progress = Math.min(elapsed / duration, 1)
+      
+      if (elapsed < 0) {
+        requestAnimationFrame(animate)
+        return
+      }
+      
+      // Smoother easing function - elastic ease-out
+      const easedProgress = progress < 0.5 
+        ? 4 * progress * progress * progress 
+        : 1 - Math.pow(-2 * progress + 2, 3) / 2
+      
+      animatedSkills.value[skill.name] = Math.floor(skill.level * easedProgress)
+      
+      if (progress < 1) {
+        requestAnimationFrame(animate)
+      }
+    }
+    
+    animate()
+  })
+}
+
+// Intersection Observer for scroll trigger
+const setupScrollTrigger = () => {
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting && !isVisible.value) {
+          isVisible.value = true
+          setTimeout(() => animateSkills(), 200)
+        }
+      })
+    },
+    { threshold: 0.3 }
+  )
+  
+  if (skillsSection.value) {
+    observer.observe(skillsSection.value)
+  }
+}
+
+onMounted(() => {
+  setupScrollTrigger()
+})
 
 const cloudSkills = [
   { name: 'Google Cloud Platform', level: 90 },
