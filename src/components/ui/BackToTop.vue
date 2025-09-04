@@ -10,7 +10,7 @@
     <button
       v-if="showBackToTop"
       @click="scrollToTop"
-      class="fixed bottom-8 right-8 z-50 glass-card p-4 rounded-full text-emerald-400 hover:text-white transition-all duration-300 group"
+      class="fixed bottom-8 right-8 z-50 glass-card p-4 rounded-full text-white hover:text-gray-200 transition-all duration-300 group"
       aria-label="Back to top"
     >
       <ChevronUp 
