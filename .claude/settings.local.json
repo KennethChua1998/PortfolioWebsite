@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:www.linkedin.com)",
+      "Bash(npm install:*)",
+      "Bash(npm run dev:*)",
+      "Bash(find:*)",
+      "Bash(npx playwright:*)",
+      "Bash(sed:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

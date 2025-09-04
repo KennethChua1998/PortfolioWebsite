@@ -1,0 +1,169 @@
+<template>
+  <div class="group project-card rounded-xl overflow-hidden relative z-10">
+    <!-- Project Image -->
+    <div class="relative h-48 glass overflow-hidden">
+      <div class="absolute inset-0 bg-gradient-to-br from-emerald-600/20 to-black/40"></div>
+      <div class="absolute inset-0 flex items-center justify-center">
+        <div class="flex flex-col items-center">
+          <Code :size="48" class="text-gray-400 mb-2" />
+          <span v-if="project.status" class="bg-emerald-600/80 text-white text-xs px-2 py-1 rounded-full">
+            {{ project.status }}
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Project Content -->
+    <div class="p-6">
+      <h3 class="text-xl font-semibold text-white mb-3">
+        {{ project.title }}
+      </h3>
+      
+      <p class="text-gray-300 mb-4 text-sm leading-relaxed">
+        {{ project.description }}
+      </p>
+      
+      <!-- Technologies -->
+      <div class="flex flex-wrap gap-2 mb-4">
+        <span
+          v-for="tech in project.technologies"
+          :key="tech"
+          class="px-3 py-1 skill-pill text-emerald-300 text-xs rounded-full"
+        >
+          {{ tech }}
+        </span>
+      </div>
+      
+      <!-- Links -->
+      <div class="flex gap-3">
+        <a
+          v-if="project.githubUrl"
+          :href="project.githubUrl"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="flex items-center gap-2 text-gray-400 hover:text-emerald-400 transition-colors duration-200"
+        >
+          <Github :size="16" />
+          <span class="text-sm">Code</span>
+        </a>
+        
+        <a
+          v-if="project.liveUrl"
+          :href="project.liveUrl"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="flex items-center gap-2 text-gray-400 hover:text-emerald-400 transition-colors duration-200"
+        >
+          <ExternalLink :size="16" />
+          <span class="text-sm">Live Demo</span>
+        </a>
+        
+        <span 
+          v-if="!project.githubUrl && !project.liveUrl"
+          class="text-gray-500 text-sm italic"
+        >
+          Confidential Project
+        </span>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script setup>
+import { Code, Github, ExternalLink } from 'lucide-vue-next'
+
+defineProps({
+  project: {
+    type: Object,
+    required: true
+  }
+})
+</script>
+
+<style scoped>
+.project-card {
+  background: linear-gradient(135deg, 
+    rgba(59, 130, 246, 0.1) 0%,
+    rgba(147, 51, 234, 0.05) 50%,
+    rgba(15, 23, 42, 0.1) 100%);
+  backdrop-filter: blur(25px) saturate(200%);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 
+    0 12px 40px rgba(59, 130, 246, 0.15),
+    0 8px 16px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.05);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.project-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, 
+    transparent, 
+    rgba(255, 255, 255, 0.4), 
+    transparent);
+}
+
+.project-card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg,
+    rgba(255, 255, 255, 0.1) 0%,
+    transparent 50%,
+    rgba(59, 130, 246, 0.05) 100%);
+  pointer-events: none;
+  border-radius: inherit;
+}
+
+.project-card:hover {
+  background: linear-gradient(135deg, 
+    rgba(59, 130, 246, 0.15) 0%,
+    rgba(147, 51, 234, 0.1) 50%,
+    rgba(15, 23, 42, 0.15) 100%);
+  backdrop-filter: blur(35px) saturate(220%);
+  border-color: rgba(59, 130, 246, 0.3);
+  box-shadow: 
+    0 20px 60px rgba(59, 130, 246, 0.25),
+    0 12px 24px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.25);
+  transform: translateY(-2px);
+}
+
+.glass {
+  background: rgba(15, 23, 42, 0.05);
+  backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.skill-pill {
+  background: rgba(15, 23, 42, 0.05);
+  backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.skill-pill:hover {
+  background: linear-gradient(135deg, 
+    rgba(59, 130, 246, 0.15) 0%,
+    rgba(147, 51, 234, 0.1) 50%,
+    rgba(15, 23, 42, 0.15) 100%);
+  backdrop-filter: blur(35px) saturate(220%);
+  border-color: rgba(59, 130, 246, 0.3);
+  transform: translateY(-1px);
+}
+</style>
