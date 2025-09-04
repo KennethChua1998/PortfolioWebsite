@@ -14,6 +14,7 @@
         <ContactSection />
       </main>
       <AppFooter />
+      <BackToTop />
     </div>
   </div>
 </template>
@@ -30,6 +31,7 @@ import SkillsSection from '@/components/sections/SkillsSection.vue'
 import ProjectsSection from '@/components/sections/ProjectsSection.vue'
 import ContactSection from '@/components/sections/ContactSection.vue'
 import NetworkAnimation from '@/components/NetworkAnimation.vue'
+import BackToTop from '@/components/ui/BackToTop.vue'
 
 const themeStore = useThemeStore()
 

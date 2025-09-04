@@ -97,7 +97,7 @@
               <button
                 type="submit"
                 :disabled="isSubmitting"
-                class="w-full bg-emerald-600 hover:bg-emerald-700 text-white px-6 py-3 rounded-lg font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                class="w-full glass-card px-6 py-3 rounded-lg font-medium text-emerald-400 hover:text-white transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {{ isSubmitting ? 'Sending...' : 'Send Message' }}
               </button>

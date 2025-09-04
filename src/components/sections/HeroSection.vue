@@ -19,10 +19,10 @@
           Delivering Google Cloud solutions with 4+ years of experience in modern web technologies, AI/ML integration, and DevOps CI/CD
         </p>
         <div class="flex flex-col sm:flex-row gap-4 justify-center">
-          <a href="#projects" class="glass-card px-8 py-4 rounded-xl text-emerald-400 font-semibold hover:text-white transition-all duration-300 glass-hover">
+          <a href="#projects" class="glass-card px-8 py-4 rounded-xl text-emerald-400 font-semibold hover:text-white transition-all duration-300">
             View Projects
           </a>
-          <a href="#contact" class="glass-card px-8 py-4 rounded-xl text-gray-300 font-semibold hover:text-emerald-400 transition-all duration-300 glass-hover">
+          <a href="#contact" class="glass-card px-8 py-4 rounded-xl text-gray-300 font-semibold hover:text-emerald-400 transition-all duration-300">
             Get In Touch
           </a>
         </div>

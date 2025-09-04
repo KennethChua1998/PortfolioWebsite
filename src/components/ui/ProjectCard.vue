@@ -1,7 +1,7 @@
 <template>
-  <div class="group project-card rounded-xl overflow-hidden relative z-10">
+  <div class="group project-card rounded-xl overflow-hidden relative z-10 flex flex-col h-full">
     <!-- Project Image -->
-    <div class="relative h-48 glass overflow-hidden">
+    <div class="relative h-48 glass overflow-hidden flex-shrink-0">
       <div class="absolute inset-0 bg-gradient-to-br from-emerald-600/20 to-black/40"></div>
       <div class="absolute inset-0 flex items-center justify-center">
         <div class="flex flex-col items-center">
@@ -14,12 +14,12 @@
     </div>
     
     <!-- Project Content -->
-    <div class="p-6">
+    <div class="p-6 flex flex-col flex-grow">
       <h3 class="text-xl font-semibold text-white mb-3">
         {{ project.title }}
       </h3>
       
-      <p class="text-gray-300 mb-4 text-sm leading-relaxed">
+      <p class="text-gray-300 mb-4 text-sm leading-relaxed flex-grow">
         {{ project.description }}
       </p>
       
@@ -35,7 +35,7 @@
       </div>
       
       <!-- Links -->
-      <div class="flex gap-3">
+      <div class="flex gap-3 mt-auto">
         <a
           v-if="project.githubUrl"
           :href="project.githubUrl"

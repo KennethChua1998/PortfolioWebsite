@@ -97,17 +97,19 @@
 
   .glass-card {
     background: linear-gradient(135deg, 
-      rgba(59, 130, 246, 0.1) 0%,
-      rgba(147, 51, 234, 0.05) 50%,
-      rgba(15, 23, 42, 0.1) 100%);
-    backdrop-filter: blur(25px) saturate(200%);
-    border: 1px solid rgba(255, 255, 255, 0.15);
+      rgba(59, 130, 246, 0.08) 0%,
+      rgba(147, 51, 234, 0.04) 50%,
+      rgba(15, 23, 42, 0.08) 100%);
+    backdrop-filter: blur(35px) saturate(250%);
+    border: 1px solid rgba(255, 255, 255, 0.18);
     box-shadow: 
-      0 12px 40px rgba(59, 130, 246, 0.15),
-      0 8px 16px rgba(0, 0, 0, 0.3),
-      inset 0 1px 0 rgba(255, 255, 255, 0.2),
-      inset 0 -1px 0 rgba(255, 255, 255, 0.05);
+      0 15px 50px rgba(59, 130, 246, 0.12),
+      0 10px 20px rgba(0, 0, 0, 0.25),
+      inset 0 2px 0 rgba(255, 255, 255, 0.25),
+      inset 0 -2px 0 rgba(255, 255, 255, 0.08);
     position: relative;
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
   }
 
   .glass-card::before {
@@ -121,6 +123,8 @@
       transparent, 
       rgba(255, 255, 255, 0.4), 
       transparent);
+    opacity: 0;
+    transition: opacity 0.4s ease;
   }
 
   .glass-card::after {
@@ -130,12 +134,48 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background: linear-gradient(135deg,
-      rgba(255, 255, 255, 0.1) 0%,
-      transparent 50%,
-      rgba(59, 130, 246, 0.05) 100%);
+    background: radial-gradient(
+      circle at 30% 20%,
+      rgba(255, 255, 255, 0.15) 0%,
+      transparent 30%
+    ),
+    radial-gradient(
+      circle at 70% 80%,
+      rgba(59, 130, 246, 0.08) 0%,
+      transparent 40%
+    );
     pointer-events: none;
     border-radius: inherit;
+    opacity: 0.7;
+    transition: opacity 0.4s ease;
+  }
+
+  .glass-card:hover {
+    background: linear-gradient(135deg, 
+      rgba(59, 130, 246, 0.15) 0%,
+      rgba(147, 51, 234, 0.08) 50%,
+      rgba(15, 23, 42, 0.12) 100%);
+    backdrop-filter: blur(45px) saturate(300%);
+    border-color: rgba(255, 255, 255, 0.3);
+    box-shadow: 
+      0 25px 80px rgba(59, 130, 246, 0.2),
+      0 15px 35px rgba(0, 0, 0, 0.3),
+      inset 0 3px 0 rgba(255, 255, 255, 0.35),
+      inset 0 -3px 0 rgba(255, 255, 255, 0.12);
+    transform: translateY(-2px) scale(1.02);
+  }
+
+  .glass-card:hover::before {
+    opacity: 1;
+  }
+
+  .glass-card:hover::after {
+    opacity: 1;
+  }
+
+  .glass-card:active {
+    transform: translateY(0) scale(0.98);
+    transition: all 0.1s ease;
   }
 
   .glass-section {
