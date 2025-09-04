@@ -6,7 +6,12 @@
       "Bash(npm run dev:*)",
       "Bash(find:*)",
       "Bash(npx playwright:*)",
-      "Bash(sed:*)"
+      "Bash(sed:*)",
+      "Read(/C:\\Users\\Kenneth Chua\\Desktop\\Alternative Repos/**)",
+      "Read(/C:\\Users\\Kenneth Chua\\Desktop\\Alternative Repos\\src/**)",
+      "Read(/C:\\Users\\Kenneth Chua\\Desktop\\Alternative Repos\\src\\components\\sections/**)",
+      "Read(/C:\\Users\\Kenneth Chua\\Desktop\\Alternative Repos\\src\\components\\sections/**)",
+      "Read(/C:\\Users\\Kenneth Chua\\Desktop\\Alternative Repos\\src\\components\\sections/**)"
     ],
     "deny": [],
     "ask": []

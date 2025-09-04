@@ -100,15 +100,14 @@
         <div class="mt-16">
           <h3 class="text-2xl font-bold text-center mb-8 text-white">Certifications</h3>
           <div class="flex flex-wrap justify-center gap-6">
-            <div class="certification-badge">
+            <div 
+              v-for="cert in certifications" 
+              :key="cert.name" 
+              class="certification-badge"
+            >
               <Award :size="20" class="text-emerald-400 mr-2" />
-              <span class="text-white font-semibold">Google Cloud Professional Developer</span>
-              <span class="text-gray-400 text-sm ml-2">(2023-2025)</span>
-            </div>
-            <div class="certification-badge">
-              <Award :size="20" class="text-emerald-400 mr-2" />
-              <span class="text-white font-semibold">Technical Expert Badge - Build with Vertex AI</span>
-              <span class="text-gray-400 text-sm ml-2">(2025-2026)</span>
+              <span class="text-white font-semibold">{{ cert.name }}</span>
+              <span class="text-gray-400 text-sm ml-2">{{ cert.period }}</span>
             </div>
           </div>
         </div>
@@ -120,6 +119,13 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import { Cloud, Code, Monitor, Settings, Award } from 'lucide-vue-next'
+import { 
+  cloudSkills, 
+  programmingSkills, 
+  frontendSkills, 
+  toolsSkills, 
+  certifications 
+} from '@/data/skills.js'
 
 const skillsSection = ref(null)
 const animatedSkills = ref({})
@@ -221,34 +227,6 @@ const setupScrollTrigger = () => {
 onMounted(() => {
   setupScrollTrigger()
 })
-
-const cloudSkills = [
-  { name: 'Google Cloud Platform', level: 90 },
-  { name: 'Containerization', level: 85 },
-  { name: 'CI/CD DevOps', level: 80 },
-  { name: 'Application Modernization', level: 85 }
-]
-
-const programmingSkills = [
-  { name: 'JavaScript', level: 90 },
-  { name: 'Python', level: 85 },
-  { name: 'Java', level: 75 },
-  { name: 'REST APIs', level: 90 }
-]
-
-const frontendSkills = [
-  { name: 'Vue.js 3', level: 85 },
-  { name: 'HTML5/CSS3', level: 90 },
-  { name: 'Responsive Design', level: 85 },
-  { name: 'Three.js', level: 70 }
-]
-
-const toolsSkills = [
-  { name: 'Git', level: 90 },
-  { name: 'Jira', level: 85 },
-  { name: 'Agile Development', level: 80 },
-  { name: 'Database Design', level: 75 }
-]
 </script>
 
 <style scoped>

@@ -4,48 +4,32 @@
       <div class="max-w-4xl mx-auto">
         <h2 class="text-4xl font-bold text-center mb-16 text-emerald-400 about-title"
             :class="{ 'animate-in': isVisible }">
-          About Kenneth
+          About {{ personalInfo.name }}
         </h2>
         
         <div class="grid md:grid-cols-2 gap-12 items-center">
           <div class="space-y-6">
-            <p class="text-lg text-gray-200 leading-relaxed about-text"
-               :class="{ 'animate-in': animatedElements.text1 }">
-              Passionate Software Engineer specializing in cloud-based solutions with 4+ years 
-              of experience delivering enterprise-grade applications. Currently serving as a 
-              Cloud Specialist at PointStar, focusing on Google Cloud technologies.
-            </p>
-            
-            <p class="text-lg text-gray-200 leading-relaxed about-text"
-               :class="{ 'animate-in': animatedElements.text2 }">
-              I excel in AI/ML integration, API development, and DevOps CI/CD implementations. 
-              My expertise spans full-stack development with modern JavaScript frameworks, 
-              Python automation, and cloud application modernization.
+            <p 
+              v-for="(desc, index) in personalInfo.description" 
+              :key="index"
+              class="text-lg text-gray-200 leading-relaxed about-text"
+              :class="{ 'animate-in': animatedElements[`text${index + 1}`] }"
+            >
+              {{ desc }}
             </p>
             
             <div class="about-glass-card p-8 rounded-xl mt-8 relative z-10 achievements-card"
                  :class="{ 'animate-in': animatedElements.achievements }">
               <h3 class="text-xl font-semibold text-emerald-300 mb-4">Key Achievements</h3>
               <ul class="space-y-2 text-gray-300">
-                <li class="flex items-start gap-2 achievement-item"
-                    :class="{ 'animate-in': animatedElements.achievement1 }">
+                <li 
+                  v-for="(achievement, index) in personalInfo.achievements" 
+                  :key="index"
+                  class="flex items-start gap-2 achievement-item"
+                  :class="{ 'animate-in': animatedElements[`achievement${index + 1}`] }"
+                >
                   <span class="text-green-400 mt-1">•</span>
-                  Technical Lead for Full Stack Project delivered to Singapore Government Agency
-                </li>
-                <li class="flex items-start gap-2 achievement-item"
-                    :class="{ 'animate-in': animatedElements.achievement2 }">
-                  <span class="text-green-400 mt-1">•</span>
-                  Google Cloud Professional Developer Certified
-                </li>
-                <li class="flex items-start gap-2 achievement-item"
-                    :class="{ 'animate-in': animatedElements.achievement3 }">
-                  <span class="text-green-400 mt-1">•</span>
-                  Delivered multiple Python automation projects and no-code solutions
-                </li>
-                <li class="flex items-start gap-2 achievement-item"
-                    :class="{ 'animate-in': animatedElements.achievement4 }">
-                  <span class="text-green-400 mt-1">•</span>
-                  Academic excellence: Dean's List recipient (CGPA 3.74)
+                  {{ achievement }}
                 </li>
               </ul>
             </div>
@@ -53,7 +37,7 @@
             <div class="flex flex-wrap gap-2 skills-container"
                  :class="{ 'animate-in': animatedElements.skills }">
               <span 
-                v-for="(skill, index) in skills" 
+                v-for="(skill, index) in personalInfo.skills" 
                 :key="skill"
                 class="px-4 py-2 skill-pill text-emerald-300 rounded-full text-sm"
                 :class="{ 'animate-in': animatedElements[`skill${index}`] }"
@@ -82,6 +66,7 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import { User } from 'lucide-vue-next'
+import { personalInfo } from '@/data/personal.js'
 
 const aboutSection = ref(null)
 const isVisible = ref(false)
@@ -128,27 +113,12 @@ const triggerAnimations = () => {
     }, delay)
   })
 
-  skills.forEach((skill, index) => {
+  personalInfo.skills.forEach((skill, index) => {
     setTimeout(() => {
       animatedElements.value[`skill${index}`] = true
     }, 1400 + (index * 50))
   })
 }
-
-const skills = [
-  'Google Cloud Platform',
-  'JavaScript',
-  'Python', 
-  'Vue.js 3',
-  'REST APIs',
-  'Containerization',
-  'DevOps CI/CD',
-  'Java',
-  'Three.js',
-  'Tailwind CSS',
-  'Full-Stack Development',
-  'Application Modernization'
-]
 </script>
 
 <style scoped>

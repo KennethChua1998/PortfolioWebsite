@@ -185,26 +185,6 @@ vercel
 vercel --prod
 ```
 
-### Netlify
-```sh
-# Build for production
-npm run build
-
-# Deploy dist folder to Netlify
-# Or connect GitHub repo for automatic deployments
-```
-
-### AWS S3 + CloudFront
-```sh
-# Build for production
-npm run build
-
-# Upload to S3 bucket
-aws s3 sync dist/ s3://your-bucket-name --delete
-
-# Invalidate CloudFront cache
-aws cloudfront create-invalidation --distribution-id YOUR_ID --paths "/*"
-```
 
 ### Docker Deployment
 ```dockerfile
