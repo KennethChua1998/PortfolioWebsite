@@ -52,8 +52,15 @@
                :class="{ 'animate-in': animatedElements.profile }">
             <div class="w-80 h-80 mx-auto bg-gradient-to-br from-primary-600 to-accent-600 rounded-full opacity-20 blur-3xl"></div>
             <div class="absolute inset-0 flex items-center justify-center">
-              <div class="w-64 h-64 bg-dark-800 rounded-full border-2 border-primary-400 flex items-center justify-center">
-                <User :size="80" class="text-primary-400" />
+              <div class="w-64 h-64 rounded-full border-2 border-primary-400 overflow-hidden shadow-2xl">
+                <img 
+                  src="/src/components/assets/profile_pic.png" 
+                  alt="Kenneth Chua Profile Picture"
+                  class="w-full h-full object-cover object-center"
+                  style="image-rendering: auto; transform: none; filter: none; will-change: auto;"
+                  width="256"
+                  height="256"
+                />
               </div>
             </div>
           </div>
@@ -65,7 +72,6 @@
 
 <script setup>
 import { ref, onMounted } from 'vue'
-import { User } from 'lucide-vue-next'
 import { personalInfo } from '@/data/personal.js'
 
 const aboutSection = ref(null)

@@ -16,7 +16,12 @@
       "Read(/C:\\Users\\Kenneth Chua\\Desktop\\Alternative Repos\\src\\components\\sections/**)",
       "Read(/C:\\Users\\Kenneth Chua\\Desktop\\Alternative Repos\\src\\data/**)",
       "Read(/C:\\Users\\Kenneth Chua\\Desktop\\Alternative Repos\\src\\components\\sections/**)",
-      "Read(/C:\\Users\\Kenneth Chua\\Desktop\\Alternative Repos/**)"
+      "Read(/C:\\Users\\Kenneth Chua\\Desktop\\Alternative Repos/**)",
+      "Read(/C:\\Users\\Kenneth Chua\\Desktop\\Alternative Repos\\src/**)",
+      "Read(/C:\\Users\\Kenneth Chua\\Desktop\\Alternative Repos\\src\\components\\webgl/**)",
+      "Read(/C:\\Users\\Kenneth Chua\\Desktop\\Alternative Repos\\src\\components\\sections/**)",
+      "Read(/C:\\Users\\Kenneth Chua\\Desktop\\Alternative Repos\\src\\components\\sections/**)",
+      "Read(/C:\\Users\\Kenneth Chua\\Desktop\\Alternative Repos\\src\\components\\assets/**)"
     ],
     "deny": [],
     "ask": []
