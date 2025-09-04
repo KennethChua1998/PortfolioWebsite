@@ -9,7 +9,6 @@ export const personalInfo = {
     "Technical Lead for Full Stack Project delivered to Singapore Government Agency",
     "Google Cloud Professional Developer Certified",
     "Delivered multiple Python automation projects and no-code solutions",
-    "Academic excellence: Dean's List recipient (CGPA 3.74)"
   ],
   skills: [
     'Google Cloud Platform',

@@ -80,38 +80,6 @@ onMounted(() => {
   transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
-/* Subtle floating animation */
-.project-wrapper.animate-in {
-  animation: subtleFloat 8s ease-in-out infinite;
-}
-
-@keyframes subtleFloat {
-  0%, 100% {
-    transform: translateY(0) rotate(0deg);
-  }
-  25% {
-    transform: translateY(-5px) rotate(0.5deg);
-  }
-  50% {
-    transform: translateY(-3px) rotate(0deg);
-  }
-  75% {
-    transform: translateY(-7px) rotate(-0.5deg);
-  }
-}
-
-/* Stagger floating animations */
-.project-wrapper:nth-child(1) { animation-delay: 0s; }
-.project-wrapper:nth-child(2) { animation-delay: 1.3s; }
-.project-wrapper:nth-child(3) { animation-delay: 2.6s; }
-.project-wrapper:nth-child(4) { animation-delay: 3.9s; }
-.project-wrapper:nth-child(5) { animation-delay: 5.2s; }
-.project-wrapper:nth-child(6) { animation-delay: 6.5s; }
-
-/* Pause floating on hover */
-.project-wrapper:hover {
-  animation-play-state: paused;
-}
 
 /* 3D entrance effects */
 .project-wrapper:nth-child(even) {

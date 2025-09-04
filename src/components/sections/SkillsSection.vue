@@ -6,88 +6,25 @@
           Core Skills & Technologies
         </h2>
         
-        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-          <!-- Cloud & DevOps -->
-          <div class="skill-category">
+        <div class="grid md:grid-cols-2 lg:grid-cols-5 gap-8">
+          <div 
+            v-for="skillCategory in skillCategories" 
+            :key="skillCategory.title"
+            class="skill-category"
+          >
             <div class="flex items-center mb-4">
-              <Cloud :size="24" class="text-blue-400 mr-3" />
-              <h3 class="text-xl font-semibold text-white">Cloud & DevOps</h3>
+              <component :is="iconComponents[skillCategory.icon]" :size="24" :class="getIconColor(skillCategory.color)" />
+              <h3 class="text-xl font-semibold text-white ml-3">{{ skillCategory.title }}</h3>
             </div>
             <div class="space-y-3">
-              <div v-for="skill in cloudSkills" :key="skill.name" class="skill-item">
+              <div v-for="skill in skillCategory.skills" :key="skill.name" class="skill-item">
                 <div class="flex justify-between mb-1">
                   <span class="text-gray-300">{{ skill.name }}</span>
-                  <span :class="getSkillColor(skill.level, 'cloud').text">{{ animatedSkills[skill.name] || 0 }}%</span>
+                  <span :class="getSkillColor(skill.level, skillCategory.color).text">{{ animatedSkills[skill.name] || 0 }}%</span>
                 </div>
                 <div class="w-full bg-gray-700 rounded-full h-2">
                   <div 
-                    :class="`bg-gradient-to-r ${getSkillColor(skill.level, 'cloud').bg} h-2 rounded-full transition-all duration-1000`"
-                    :style="{ width: (animatedSkills[skill.name] || 0) + '%' }"
-                  ></div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Programming -->
-          <div class="skill-category">
-            <div class="flex items-center mb-4">
-              <Code :size="24" class="text-emerald-400 mr-3" />
-              <h3 class="text-xl font-semibold text-white">Programming</h3>
-            </div>
-            <div class="space-y-3">
-              <div v-for="skill in programmingSkills" :key="skill.name" class="skill-item">
-                <div class="flex justify-between mb-1">
-                  <span class="text-gray-300">{{ skill.name }}</span>
-                  <span :class="getSkillColor(skill.level, 'programming').text">{{ animatedSkills[skill.name] || 0 }}%</span>
-                </div>
-                <div class="w-full bg-gray-700 rounded-full h-2">
-                  <div 
-                    :class="`bg-gradient-to-r ${getSkillColor(skill.level, 'programming').bg} h-2 rounded-full transition-all duration-1000`"
-                    :style="{ width: (animatedSkills[skill.name] || 0) + '%' }"
-                  ></div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Frontend -->
-          <div class="skill-category">
-            <div class="flex items-center mb-4">
-              <Monitor :size="24" class="text-purple-400 mr-3" />
-              <h3 class="text-xl font-semibold text-white">Frontend</h3>
-            </div>
-            <div class="space-y-3">
-              <div v-for="skill in frontendSkills" :key="skill.name" class="skill-item">
-                <div class="flex justify-between mb-1">
-                  <span class="text-gray-300">{{ skill.name }}</span>
-                  <span :class="getSkillColor(skill.level, 'frontend').text">{{ animatedSkills[skill.name] || 0 }}%</span>
-                </div>
-                <div class="w-full bg-gray-700 rounded-full h-2">
-                  <div 
-                    :class="`bg-gradient-to-r ${getSkillColor(skill.level, 'frontend').bg} h-2 rounded-full transition-all duration-1000`"
-                    :style="{ width: (animatedSkills[skill.name] || 0) + '%' }"
-                  ></div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Tools & Workflow -->
-          <div class="skill-category">
-            <div class="flex items-center mb-4">
-              <Settings :size="24" class="text-amber-400 mr-3" />
-              <h3 class="text-xl font-semibold text-white">Tools & Workflow</h3>
-            </div>
-            <div class="space-y-3">
-              <div v-for="skill in toolsSkills" :key="skill.name" class="skill-item">
-                <div class="flex justify-between mb-1">
-                  <span class="text-gray-300">{{ skill.name }}</span>
-                  <span :class="getSkillColor(skill.level, 'tools').text">{{ animatedSkills[skill.name] || 0 }}%</span>
-                </div>
-                <div class="w-full bg-gray-700 rounded-full h-2">
-                  <div 
-                    :class="`bg-gradient-to-r ${getSkillColor(skill.level, 'tools').bg} h-2 rounded-full transition-all duration-1000`"
+                    :class="`bg-gradient-to-r ${getSkillColor(skill.level, skillCategory.color).bg} h-2 rounded-full transition-all duration-1000`"
                     :style="{ width: (animatedSkills[skill.name] || 0) + '%' }"
                   ></div>
                 </div>
@@ -118,11 +55,12 @@
 
 <script setup>
 import { ref, onMounted } from 'vue'
-import { Cloud, Code, Monitor, Settings, Award } from 'lucide-vue-next'
+import { Cloud, Code, Monitor, Settings, Award, Database } from 'lucide-vue-next'
 import { 
   cloudSkills, 
-  programmingSkills, 
+  backendSkills, 
   frontendSkills, 
+  databaseSkills,
   toolsSkills, 
   certifications 
 } from '@/data/skills.js'
@@ -131,40 +69,59 @@ const skillsSection = ref(null)
 const animatedSkills = ref({})
 const isVisible = ref(false)
 
+// Icon component mapping
+const iconComponents = {
+  Cloud,
+  Code,
+  Monitor,
+  Database,
+  Settings
+}
+
+// Combine all skill categories for easy iteration
+const skillCategories = [cloudSkills, frontendSkills, backendSkills, databaseSkills, toolsSkills]
+
 // Different color schemes for each category
-const getSkillColor = (level, category) => {
+const getSkillColor = (level, color) => {
   const colorSchemes = {
-    cloud: {
+    blue: {
       90: { text: 'text-blue-300', bg: 'from-blue-400 to-cyan-400' },
       85: { text: 'text-blue-400', bg: 'from-blue-500 to-cyan-500' },
       80: { text: 'text-cyan-400', bg: 'from-blue-600 to-cyan-600' },
       75: { text: 'text-cyan-500', bg: 'from-cyan-600 to-blue-700' },
       default: { text: 'text-cyan-600', bg: 'from-cyan-700 to-blue-800' }
     },
-    programming: {
+    emerald: {
       90: { text: 'text-emerald-300', bg: 'from-emerald-400 to-green-400' },
       85: { text: 'text-emerald-400', bg: 'from-emerald-500 to-green-500' },
       80: { text: 'text-green-400', bg: 'from-emerald-600 to-green-600' },
       75: { text: 'text-green-500', bg: 'from-green-600 to-emerald-700' },
       default: { text: 'text-green-600', bg: 'from-green-700 to-emerald-800' }
     },
-    frontend: {
+    purple: {
       90: { text: 'text-purple-300', bg: 'from-purple-400 to-pink-400' },
       85: { text: 'text-purple-400', bg: 'from-purple-500 to-pink-500' },
       80: { text: 'text-pink-400', bg: 'from-purple-600 to-pink-600' },
       75: { text: 'text-pink-500', bg: 'from-pink-600 to-purple-700' },
       default: { text: 'text-pink-600', bg: 'from-pink-700 to-purple-800' }
     },
-    tools: {
-      90: { text: 'text-amber-300', bg: 'from-amber-400 to-orange-400' },
-      85: { text: 'text-amber-400', bg: 'from-amber-500 to-orange-500' },
-      80: { text: 'text-orange-400', bg: 'from-amber-600 to-orange-600' },
-      75: { text: 'text-orange-500', bg: 'from-orange-600 to-amber-700' },
-      default: { text: 'text-orange-600', bg: 'from-orange-700 to-amber-800' }
+    orange: {
+      90: { text: 'text-orange-300', bg: 'from-orange-400 to-red-400' },
+      85: { text: 'text-orange-400', bg: 'from-orange-500 to-red-500' },
+      80: { text: 'text-red-400', bg: 'from-orange-600 to-red-600' },
+      75: { text: 'text-red-500', bg: 'from-red-600 to-orange-700' },
+      default: { text: 'text-red-600', bg: 'from-red-700 to-orange-800' }
+    },
+    amber: {
+      90: { text: 'text-amber-300', bg: 'from-amber-400 to-yellow-400' },
+      85: { text: 'text-amber-400', bg: 'from-amber-500 to-yellow-500' },
+      80: { text: 'text-yellow-400', bg: 'from-amber-600 to-yellow-600' },
+      75: { text: 'text-yellow-500', bg: 'from-yellow-600 to-amber-700' },
+      default: { text: 'text-yellow-600', bg: 'from-yellow-700 to-amber-800' }
     }
   }
   
-  const scheme = colorSchemes[category] || colorSchemes.programming
+  const scheme = colorSchemes[color] || colorSchemes.emerald
   if (level >= 90) return scheme[90]
   if (level >= 85) return scheme[85]
   if (level >= 80) return scheme[80]
@@ -172,9 +129,27 @@ const getSkillColor = (level, category) => {
   return scheme.default
 }
 
+// Get icon color based on color scheme
+const getIconColor = (color) => {
+  const iconColors = {
+    blue: 'text-blue-400 mr-3',
+    emerald: 'text-emerald-400 mr-3',
+    purple: 'text-purple-400 mr-3',
+    orange: 'text-orange-400 mr-3',
+    amber: 'text-amber-400 mr-3'
+  }
+  return iconColors[color] || 'text-emerald-400 mr-3'
+}
+
 // Animate skill percentages on scroll
 const animateSkills = () => {
-  const skills = [...cloudSkills, ...programmingSkills, ...frontendSkills, ...toolsSkills]
+  const skills = [
+    ...cloudSkills.skills, 
+    ...backendSkills.skills, 
+    ...frontendSkills.skills, 
+    ...databaseSkills.skills, 
+    ...toolsSkills.skills
+  ]
   
   skills.forEach((skill, index) => {
     const startTime = Date.now() + (index * 50) // Faster stagger - 50ms instead of 100ms
