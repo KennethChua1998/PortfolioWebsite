@@ -4,16 +4,16 @@
       <div class="flex flex-col md:flex-row justify-between items-center">
         <div class="mb-4 md:mb-0">
           <div class="text-2xl font-bold text-emerald-400 mb-2">
-            Kenneth Chua
+            {{ footerData.name }} Chua
           </div>
           <p class="text-gray-400 text-sm">
-            Cloud Specialist & Full-Stack Developer
+            {{ footerData.title }}
           </p>
         </div>
         
         <div class="flex space-x-6">
           <a
-            href="https://github.com/kenneth-chua"
+            :href="footerData.contactInfo.github"
             target="_blank"
             rel="noopener noreferrer"
             class="text-gray-400 hover:text-emerald-400 transition-colors"
@@ -22,7 +22,7 @@
           </a>
           
           <a
-            href="https://www.linkedin.com/in/kenneth-chua/"
+            :href="footerData.contactInfo.linkedin"
             target="_blank"
             rel="noopener noreferrer"
             class="text-gray-400 hover:text-emerald-400 transition-colors"
@@ -31,7 +31,7 @@
           </a>
           
           <a
-            href="mailto:kenneth.chua.dev@gmail.com"
+            :href="`mailto:${footerData.contactInfo.email}`"
             class="text-gray-400 hover:text-emerald-400 transition-colors"
           >
             <Mail :size="20" />
@@ -41,7 +41,7 @@
       
       <div class="mt-8 pt-8 border-t border-gray-800 text-center">
         <p class="text-gray-500 text-sm">
-          © {{ currentYear }} Kenneth Chua. Cloud Specialist & Full-Stack Developer.
+          © {{ currentYear }} {{ footerData.name }} Chua. {{ footerData.title }}.
         </p>
       </div>
     </div>
@@ -51,6 +51,7 @@
 <script setup>
 import { computed } from 'vue'
 import { Github, Linkedin, Mail } from 'lucide-vue-next'
+import { footerData } from '@/data/footer.js'
 
 const currentYear = computed(() => new Date().getFullYear())
 </script>

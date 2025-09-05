@@ -6,9 +6,17 @@
       <div class="absolute inset-0 flex items-center justify-center">
         <div class="flex flex-col items-center">
           <Code :size="48" class="text-gray-400 mb-2" />
-          <span v-if="project.status" class="bg-emerald-600/80 text-white text-xs px-2 py-1 rounded-full">
-            {{ project.status }}
-          </span>
+          <div class="flex flex-wrap gap-2 items-center">
+            <span v-if="project.status" class="bg-emerald-600/80 text-white text-xs px-2 py-1 rounded-full">
+              {{ project.status }}
+            </span>
+            <span v-if="project.year" class="bg-blue-600/80 text-white text-xs px-2 py-1 rounded-full">
+              {{ project.year }}
+            </span>
+            <span v-if="project.aiAssisted" class="bg-purple-600/80 text-white text-xs px-2 py-1 rounded-full">
+              AI-Assisted
+            </span>
+          </div>
         </div>
       </div>
     </div>

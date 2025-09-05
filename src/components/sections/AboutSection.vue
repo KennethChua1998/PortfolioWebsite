@@ -12,7 +12,7 @@
             <p 
               v-for="(desc, index) in personalInfo.description" 
               :key="index"
-              class="text-lg text-gray-200 leading-relaxed about-text"
+              class="text-lg text-gray-200 leading-relaxed text-justify about-text"
               :class="{ 'animate-in': animatedElements[`text${index + 1}`] }"
             >
               {{ desc }}
@@ -54,7 +54,7 @@
             <div class="absolute inset-0 flex items-center justify-center">
               <div class="w-64 h-64 rounded-full border-2 border-primary-400 overflow-hidden shadow-2xl">
                 <img 
-                  src="/src/components/assets/profile_pic.png" 
+                  src="/profile_pic.png" 
                   alt="Kenneth Chua Profile Picture"
                   class="w-full h-full object-cover object-center"
                   style="image-rendering: auto; transform: none; filter: none; will-change: auto;"

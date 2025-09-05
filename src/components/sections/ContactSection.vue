@@ -3,7 +3,7 @@
     <div class="container mx-auto px-6">
       <div class="max-w-4xl mx-auto">
         <h2 class="text-4xl font-bold text-center mb-16 text-emerald-400">
-          Get In Touch
+          {{ contactData.title }}
         </h2>
         
         <div class="grid md:grid-cols-2 gap-12">
@@ -11,42 +11,45 @@
           <div class="space-y-8">
             <div>
               <h3 class="text-2xl font-semibold text-white mb-4">
-                Let's work together
+                {{ contactData.heading }}
               </h3>
               <p class="text-gray-300 leading-relaxed">
-                I'm always interested in new opportunities and exciting projects. 
-                Whether you need Google Cloud solutions, full-stack development, or 
-                want to discuss modern web technologies, feel free to reach out.
+                {{ contactData.description }}
               </p>
             </div>
             
             <div class="space-y-4">
               <div class="flex items-center gap-4">
                 <Mail :size="20" class="text-emerald-400" />
-                <span class="text-gray-200">[Your Email]</span>
+                <a 
+                  :href="`mailto:${contactData.contactInfo.email}`"
+                  class="text-gray-200 hover:text-emerald-400 transition-colors"
+                >
+                  {{ contactData.contactInfo.email }}
+                </a>
               </div>
               
               <div class="flex items-center gap-4">
                 <Linkedin :size="20" class="text-emerald-400" />
                 <a 
-                  href="https://www.linkedin.com/in/kenneth-chua/"
+                  :href="contactData.contactInfo.linkedin"
                   target="_blank"
                   rel="noopener noreferrer"
                   class="text-gray-200 hover:text-emerald-400 transition-colors"
                 >
-                  linkedin.com/in/kenneth-chua
+                  {{ contactData.contactInfo.linkedinDisplay }}
                 </a>
               </div>
               
               <div class="flex items-center gap-4">
                 <Github :size="20" class="text-emerald-400" />
                 <a 
-                  href="https://github.com/kenneth-chua"
+                  :href="contactData.contactInfo.github"
                   target="_blank"
                   rel="noopener noreferrer"
                   class="text-gray-200 hover:text-emerald-400 transition-colors"
                 >
-                  github.com/kenneth-chua
+                  {{ contactData.contactInfo.github.replace('https://github.com/', 'github.com/') }}
                 </a>
               </div>
             </div>
@@ -57,7 +60,7 @@
             <form @submit.prevent="handleSubmit" class="space-y-6">
               <div>
                 <label for="name" class="block text-sm font-medium text-gray-200 mb-2">
-                  Name
+                  {{ contactData.form.name }}
                 </label>
                 <input
                   id="name"
@@ -70,7 +73,7 @@
               
               <div>
                 <label for="email" class="block text-sm font-medium text-gray-200 mb-2">
-                  Email
+                  {{ contactData.form.email }}
                 </label>
                 <input
                   id="email"
@@ -83,7 +86,7 @@
               
               <div>
                 <label for="message" class="block text-sm font-medium text-gray-200 mb-2">
-                  Message
+                  {{ contactData.form.message }}
                 </label>
                 <textarea
                   id="message"
@@ -99,7 +102,7 @@
                 :disabled="isSubmitting"
                 class="w-full glass-card px-6 py-3 rounded-lg font-medium text-emerald-400 hover:text-white transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                {{ isSubmitting ? 'Sending...' : 'Send Message' }}
+                {{ isSubmitting ? contactData.form.submitting : contactData.form.submit }}
               </button>
             </form>
           </div>
@@ -112,6 +115,7 @@
 <script setup>
 import { ref } from 'vue'
 import { Mail, Linkedin, Github } from 'lucide-vue-next'
+import { contactData } from '@/data/contact.js'
 
 const form = ref({
   name: '',

@@ -10,20 +10,20 @@
     <div class="relative z-10 section-container text-center">
       <div class="animate-fade-in">
         <h1 class="text-5xl md:text-7xl font-bold mb-6 gradient-text">
-          Kenneth Chua
+          {{ heroData.name }} Chua
         </h1>
         <p class="text-xl md:text-2xl text-gray-300 mb-4 max-w-2xl mx-auto">
-          Cloud Specialist & Full-Stack Developer
+          {{ heroData.title }}
         </p>
         <p class="text-lg text-gray-400 mb-8 max-w-3xl mx-auto">
-          Delivering Google Cloud solutions with 4+ years of experience in modern web technologies, AI/ML integration, and DevOps CI/CD
+          {{ heroData.subtitle }}
         </p>
         <div class="flex flex-col sm:flex-row gap-4 justify-center">
           <a href="#projects" class="glass-card px-8 py-4 rounded-xl text-emerald-400 font-semibold hover:text-white transition-all duration-300">
-            View Projects
+            {{ heroData.buttons.projects }}
           </a>
           <a href="#contact" class="glass-card px-8 py-4 rounded-xl text-gray-300 font-semibold hover:text-emerald-400 transition-all duration-300">
-            Get In Touch
+            {{ heroData.buttons.contact }}
           </a>
         </div>
       </div>
@@ -35,6 +35,7 @@
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue'
 import { useThreeJS } from '@/composables/useThreeJS.js'
+import { heroData } from '@/data/hero.js'
 
 const canvasRef = ref()
 
