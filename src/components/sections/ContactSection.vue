@@ -57,6 +57,18 @@
           
           <!-- Contact Form -->
           <div class="contact-form p-10 rounded-2xl relative z-10">
+            <!-- Success/Error Message -->
+            <div 
+              v-if="showMessage" 
+              class="mb-6 p-4 rounded-lg transition-all duration-300"
+              :class="{
+                'bg-green-900/20 border border-green-500/30 text-green-300': messageType === 'success',
+                'bg-red-900/20 border border-red-500/30 text-red-300': messageType === 'error'
+              }"
+            >
+              <p class="text-sm">{{ messageText }}</p>
+            </div>
+            
             <form @submit.prevent="handleSubmit" class="space-y-6">
               <div>
                 <label for="name" class="block text-sm font-medium text-gray-200 mb-2">
@@ -124,24 +136,93 @@ const form = ref({
 })
 
 const isSubmitting = ref(false)
+const showMessage = ref(false)
+const messageType = ref('') // 'success' or 'error'
+const messageText = ref('')
 
-const handleSubmit = async () => {
-  isSubmitting.value = true
+// Form validation
+const validateForm = () => {
+  const errors = []
   
-  // Simulate form submission
-  await new Promise(resolve => setTimeout(resolve, 1000))
-  
-  // Reset form
-  form.value = {
-    name: '',
-    email: '',
-    message: ''
+  if (!form.value.name.trim()) {
+    errors.push(contactData.messages.validation.nameRequired)
   }
   
-  isSubmitting.value = false
+  if (!form.value.email.trim()) {
+    errors.push(contactData.messages.validation.emailRequired)
+  } else if (!isValidEmail(form.value.email)) {
+    errors.push(contactData.messages.validation.emailInvalid)
+  }
   
-  // Show success message (you can implement proper notification)
-  alert('Message sent successfully!')
+  if (!form.value.message.trim()) {
+    errors.push(contactData.messages.validation.messageRequired)
+  }
+  
+  return errors
+}
+
+const isValidEmail = (email) => {
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+  return emailRegex.test(email)
+}
+
+const showNotification = (type, text) => {
+  messageType.value = type
+  messageText.value = text
+  showMessage.value = true
+  
+  // Hide message after 5 seconds
+  setTimeout(() => {
+    showMessage.value = false
+  }, 5000)
+}
+
+const handleSubmit = async () => {
+  // Validate form
+  const errors = validateForm()
+  if (errors.length > 0) {
+    showNotification('error', errors[0])
+    return
+  }
+
+  isSubmitting.value = true
+  
+  try {
+    // Prepare form data for Web3Forms
+    const formData = new FormData()
+    formData.append('access_key', contactData.form.publicKey)
+    formData.append('name', form.value.name)
+    formData.append('email', form.value.email)
+    formData.append('message', form.value.message)
+    formData.append('from_name', 'Portfolio Contact Form')
+    formData.append('subject', `New message from ${form.value.name}`)
+    
+    // Submit to Web3Forms
+    const response = await fetch(contactData.form.apiUrl, {
+      method: 'POST',
+      body: formData
+    })
+    
+    const result = await response.json()
+    
+    if (result.success) {
+      // Success - reset form and show success message
+      form.value = {
+        name: '',
+        email: '',
+        message: ''
+      }
+      showNotification('success', contactData.messages.success)
+    } else {
+      throw new Error(result.message || 'Form submission failed')
+    }
+    
+  } catch (error) {
+    console.error('Form submission error:', error)
+    showNotification('error', contactData.messages.error)
+  } finally {
+    isSubmitting.value = false
+  }
 }
 </script>
 
