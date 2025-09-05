@@ -10,7 +10,7 @@
     <div class="relative z-10 section-container text-center">
       <div class="animate-fade-in">
         <h1 class="text-5xl md:text-7xl font-bold mb-6 gradient-text">
-          {{ heroData.name }} Chua
+          {{ heroData.name }}
         </h1>
         <p class="text-xl md:text-2xl text-gray-300 mb-4 max-w-2xl mx-auto">
           {{ heroData.title }}

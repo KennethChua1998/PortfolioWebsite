@@ -4,7 +4,7 @@ export const cloudSkills = {
   color: "blue",
   skills: [
     { name: "Google Cloud", level: 95 },
-    { name: "Serverless", level: 95 },
+    { name: "Serverless", level: 85 },
     { name: "Containerization", level: 85 },
     { name: "Virtualization", level: 65 },
   ],

@@ -4,7 +4,7 @@
       <div class="flex flex-col md:flex-row justify-between items-center">
         <div class="mb-4 md:mb-0">
           <div class="text-2xl font-bold text-emerald-400 mb-2">
-            {{ footerData.name }} Chua
+            {{ footerData.name }}
           </div>
           <p class="text-gray-400 text-sm">
             {{ footerData.title }}
@@ -41,7 +41,7 @@
       
       <div class="mt-8 pt-8 border-t border-gray-800 text-center">
         <p class="text-gray-500 text-sm">
-          © {{ currentYear }} {{ footerData.name }} Chua. {{ footerData.title }}.
+          © {{ currentYear }} {{ footerData.name }}. {{ footerData.copyright }}.
         </p>
       </div>
     </div>
