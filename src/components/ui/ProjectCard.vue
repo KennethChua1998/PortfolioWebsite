@@ -1,22 +1,38 @@
 <template>
   <div class="group project-card rounded-xl overflow-hidden relative z-10 flex flex-col h-full">
     <!-- Project Image -->
-    <div class="relative h-48 glass overflow-hidden flex-shrink-0">
-      <div class="absolute inset-0 bg-gradient-to-br from-emerald-600/20 to-black/40"></div>
-      <div class="absolute inset-0 flex items-center justify-center">
-        <div class="flex flex-col items-center">
-          <Code :size="48" class="text-gray-400 mb-2" />
-          <div class="flex flex-wrap gap-2 items-center">
-            <span v-if="project.status" class="bg-emerald-600/80 text-white text-xs px-2 py-1 rounded-full">
-              {{ project.status }}
-            </span>
-            <span v-if="project.year" class="bg-blue-600/80 text-white text-xs px-2 py-1 rounded-full">
-              {{ project.year }}
-            </span>
-            <span v-if="project.aiAssisted" class="bg-purple-600/80 text-white text-xs px-2 py-1 rounded-full">
-              AI-Assisted
-            </span>
+    <div class="relative h-48 overflow-hidden flex-shrink-0 rounded-t-xl">
+      <img 
+        v-if="project.imageUrl" 
+        :src="project.imageUrl" 
+        :alt="project.title"
+        class="absolute inset-0 w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+        @error="handleImageError"
+      />
+      <div v-else class="w-full h-full flex items-center justify-center bg-gradient-to-br from-gray-800/50 to-gray-900/50">
+        <div class="flex flex-col items-center space-y-3">
+          <div class="p-4 rounded-full bg-gray-700/50 backdrop-blur-sm">
+            <Code :size="32" class="text-gray-400" />
           </div>
+          <p class="text-gray-400 text-sm font-medium">Project Preview</p>
+        </div>
+      </div>
+      
+      <!-- Subtle overlay only on hover -->
+      <div class="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300"></div>
+      
+      <!-- Tags appear only on hover -->
+      <div class="absolute top-3 left-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+        <div class="flex flex-wrap gap-2 items-center">
+          <span v-if="project.status" class="bg-black/80 backdrop-blur-sm text-white text-xs px-2 py-1 rounded-full border border-white/20">
+            {{ project.status }}
+          </span>
+          <span v-if="project.year" class="bg-black/80 backdrop-blur-sm text-white text-xs px-2 py-1 rounded-full border border-white/20">
+            {{ project.year }}
+          </span>
+          <span v-if="project.aiAssisted" class="bg-black/80 backdrop-blur-sm text-white text-xs px-2 py-1 rounded-full border border-white/20">
+            AI-Assisted
+          </span>
         </div>
       </div>
     </div>
@@ -27,7 +43,7 @@
         {{ project.title }}
       </h3>
       
-      <p class="text-gray-300 mb-4 text-sm leading-relaxed flex-grow">
+      <p class="text-gray-300 mb-4 text-sm leading-relaxed flex-grow text-justify">
         {{ project.description }}
       </p>
       
@@ -86,6 +102,12 @@ defineProps({
     required: true
   }
 })
+
+const handleImageError = (event) => {
+  console.warn('Failed to load project image:', event.target.src)
+  // Hide the image element on error
+  event.target.style.display = 'none'
+}
 </script>
 
 <style scoped>

@@ -35,7 +35,7 @@
 
         <!-- Certifications -->
         <div class="mt-16">
-          <h3 class="text-2xl font-bold text-center mb-8 text-white">Certifications</h3>
+          <h3 class="text-4xl font-bold text-center mb-8 text-emerald-400">Certifications</h3>
           <div class="flex flex-wrap justify-center gap-6">
             <div 
               v-for="cert in certifications" 

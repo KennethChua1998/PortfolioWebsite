@@ -13,7 +13,7 @@
               <h3 class="text-2xl font-semibold text-white mb-4">
                 {{ contactData.heading }}
               </h3>
-              <p class="text-gray-300 leading-relaxed">
+              <p class="text-gray-300 leading-relaxed text-justify">
                 {{ contactData.description }}
               </p>
             </div>

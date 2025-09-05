@@ -14,13 +14,14 @@ let nodeGeometry, nodeMaterial
 let mousePosition = { x: 0, y: 0 }
 
 const config = {
-  nodeCount: 80,
+  nodeCount: 50, // Reduced from 80 to improve performance
   maxDistance: 120,
   nodeColor: 0x00ff88,
   connectionColor: 0x00cc66,
   nodeSize: 2,
   animationSpeed: 0.5,
-  mouseInfluence: 100
+  mouseInfluence: 100,
+  maxConnections: 100 // Limit total connections
 }
 
 onMounted(() => {
@@ -32,28 +33,91 @@ onMounted(() => {
 })
 
 onBeforeUnmount(() => {
+  cleanup()
+})
+
+function cleanup() {
   if (animationId) {
     cancelAnimationFrame(animationId)
+    animationId = null
   }
+  
   window.removeEventListener('mousemove', onMouseMove)
   window.removeEventListener('resize', onWindowResize)
   
+  // Dispose of all connections
+  connections.forEach(line => {
+    if (line.geometry) line.geometry.dispose()
+    if (line.material) line.material.dispose()
+    scene.remove(line)
+  })
+  connections = []
+  
+  // Dispose of nodes
+  nodes.forEach(node => {
+    scene.remove(node)
+  })
+  nodes = []
+  
+  // Dispose of shared geometry and material
+  if (nodeGeometry) nodeGeometry.dispose()
+  if (nodeMaterial) nodeMaterial.dispose()
+  
+  // Dispose renderer
   if (renderer) {
     renderer.dispose()
+    renderer.forceContextLoss()
+    if (container.value && renderer.domElement) {
+      container.value.removeChild(renderer.domElement)
+    }
   }
-})
+  
+  scene = null
+  camera = null
+  renderer = null
+}
 
 function initThreeJS() {
-  scene = new THREE.Scene()
-  camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000)
-  
-  renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true })
-  renderer.setSize(window.innerWidth, window.innerHeight)
-  renderer.setClearColor(0x000000, 0)
-  
-  container.value.appendChild(renderer.domElement)
-  
-  camera.position.z = 300
+  try {
+    scene = new THREE.Scene()
+    camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000)
+    
+    renderer = new THREE.WebGLRenderer({ 
+      alpha: true, 
+      antialias: false, // Disable for better performance
+      powerPreference: "high-performance",
+      failIfMajorPerformanceCaveat: true
+    })
+    renderer.setSize(window.innerWidth, window.innerHeight)
+    renderer.setClearColor(0x000000, 0)
+    
+    // Add WebGL context loss handling
+    renderer.domElement.addEventListener('webglcontextlost', onContextLost, false)
+    renderer.domElement.addEventListener('webglcontextrestored', onContextRestored, false)
+    
+    container.value.appendChild(renderer.domElement)
+    camera.position.z = 300
+    
+  } catch (error) {
+    console.error('WebGL initialization failed:', error)
+    // Fallback or show error message to user
+  }
+}
+
+function onContextLost(event) {
+  console.warn('WebGL context lost')
+  event.preventDefault()
+  if (animationId) {
+    cancelAnimationFrame(animationId)
+    animationId = null
+  }
+}
+
+function onContextRestored() {
+  console.log('WebGL context restored')
+  // Reinitialize scene if needed
+  createNetwork()
+  animate()
 }
 
 function createNetwork() {

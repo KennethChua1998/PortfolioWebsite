@@ -52,7 +52,7 @@
                :class="{ 'animate-in': animatedElements.profile }">
             <div class="w-80 h-80 mx-auto bg-gradient-to-br from-primary-600 to-accent-600 rounded-full opacity-20 blur-3xl"></div>
             <div class="absolute inset-0 flex items-center justify-center">
-              <div class="w-64 h-64 rounded-full border-2 border-primary-400 overflow-hidden shadow-2xl">
+              <div class="w-64 h-64 rounded-full glass-border overflow-hidden shadow-2xl">
                 <img 
                   src="/profile_pic.png" 
                   alt="Kenneth Chua Profile Picture"
@@ -237,19 +237,49 @@ const triggerAnimations = () => {
   transform: translateX(0) scale(1);
 }
 
-/* Subtle pulse animation for profile icon */
-.profile-section.animate-in .text-primary-400 {
+/* Glass border for profile picture */
+.glass-border {
+  background: linear-gradient(135deg, 
+    rgba(255, 255, 255, 0.1) 0%,
+    rgba(255, 255, 255, 0.05) 50%,
+    rgba(255, 255, 255, 0.1) 100%);
+  backdrop-filter: blur(20px) saturate(180%);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 
+    0 8px 32px rgba(59, 130, 246, 0.15),
+    0 4px 16px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.1);
+  position: relative;
+}
+
+.glass-border::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  padding: 2px;
+  background: linear-gradient(135deg, 
+    rgba(59, 130, 246, 0.3) 0%,
+    rgba(147, 51, 234, 0.2) 50%,
+    rgba(59, 130, 246, 0.3) 100%);
+  border-radius: inherit;
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+}
+
+/* Subtle pulse animation for profile picture */
+.profile-section.animate-in .glass-border {
   animation: subtlePulse 3s ease-in-out infinite;
 }
 
 @keyframes subtlePulse {
   0%, 100% {
-    opacity: 0.8;
+    opacity: 0.9;
     transform: scale(1);
   }
   50% {
     opacity: 1;
-    transform: scale(1.05);
+    transform: scale(1.02);
   }
 }
 </style>
