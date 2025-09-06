@@ -1,5 +1,8 @@
 # Kenneth Chua - Personal Portfolio
 
+[![CI/CD Pipeline](https://github.com/KennethChua1998/Portfolio-Website/workflows/CI%2FCD%20Pipeline/badge.svg)](https://github.com/KennethChua1998/Portfolio-Website/actions)
+[![Vue](https://img.shields.io/badge/Vue.js-3.x-4FC08D?style=flat&logo=vue.js&logoColor=white)](https://vuejs.org/)
+
 Modern Vue.js website with Three.js WebGL animations and responsive design. You are currently viewing this project.
 
 **Cloud Specialist @ PointStar | Google Cloud Professional Certified**
@@ -267,6 +270,54 @@ All text content must be stored in the corresponding data files:
 - Form labels → Store in `contactData.form`
 - Error messages → Store in data files (not hardcoded)
 
+## Testing
+
+Comprehensive test suite using Vitest and Vue Test Utils with 100% test coverage.
+
+### Test Structure
+
+```
+tests/
+├── components/          # Vue component tests
+│   └── ProjectCard.test.js
+├── stores/             # Pinia store tests
+│   └── theme.test.js
+├── data/               # Data validation tests
+│   ├── projects.test.js
+│   └── skills.test.js
+└── composables/        # Composable function tests
+    └── useThreeJS.test.js
+```
+
+### Running Tests
+
+```bash
+# Run all tests
+npm run test
+
+# Run tests with UI
+npm run test:ui
+
+# Run specific test file
+npx vitest tests/components/ProjectCard.test.js
+```
+
+### Test Coverage
+
+- **Components (8 tests)**: ProjectCard rendering, props, events, error handling
+- **Stores (9 tests)**: Theme management, localStorage, state mutations
+- **Data Validation (22 tests)**: Projects structure, skills integrity, certifications
+- **Composables (10 tests)**: Three.js functions, initialization, cleanup
+
+### Test Configuration
+
+- **Framework**: Vitest with jsdom environment for Vue component testing
+- **Vue Testing**: @vue/test-utils for component mount and interaction
+- **Mocking**: Vi mocks for localStorage, Three.js, and browser APIs
+- **Assertions**: Expect API with custom matchers for comprehensive validation
+
+**Current Status**: ✅ 49 tests passing (100% success rate)
+
 ## Contributing
 
 Contributions are what make the open-source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
@@ -281,30 +332,61 @@ If you have a suggestion that would make this better, please fork the repo and c
 
 ## Cloud Deployment
 
-### Vercel (Recommended for Vue.js)
+### Google Cloud Run (Recommended)
 
-```sh
-# Install Vercel CLI
-npm i -g vercel
+This project includes automated deployment to Google Cloud Run via GitHub Actions.
 
-# Deploy to Vercel
-vercel
+#### Required Service Account Permissions (Least Privilege):
 
-# Auto-deployment on git push (connect GitHub repo)
-vercel --prod
+Use these minimal predefined roles:
+- **`roles/run.developer`** - Deploy and manage Cloud Run services (not admin)
+- **`roles/storage.objectAdmin`** - Push/pull container images only
+- **`roles/iam.serviceAccountUser`** - Act as Cloud Run service account
+
+#### Quick Setup:
+```bash
+# Replace with your project ID and region
+PROJECT_ID="your-project-id"
+REGION="us-central1"
+SA_EMAIL="github-actions-sa@$PROJECT_ID.iam.gserviceaccount.com"
+
+# 1. Enable required APIs
+gcloud services enable run.googleapis.com
+gcloud services enable artifactregistry.googleapis.com
+
+# 2. Create Artifact Registry repository
+gcloud artifacts repositories create portfolio \
+    --repository-format=docker \
+    --location=$REGION \
+    --description="Docker repository for portfolio app"
+
+# 3. Assign minimal roles for deployment
+gcloud projects add-iam-policy-binding $PROJECT_ID \
+    --member="serviceAccount:$SA_EMAIL" \
+    --role="roles/run.developer"
+
+gcloud projects add-iam-policy-binding $PROJECT_ID \
+    --member="serviceAccount:$SA_EMAIL" \
+    --role="roles/artifactregistry.writer"
+
+gcloud projects add-iam-policy-binding $PROJECT_ID \
+    --member="serviceAccount:$SA_EMAIL" \
+    --role="roles/iam.serviceAccountUser"
 ```
 
-### Docker Deployment
+#### GitHub Secrets Required:
+- **`GCP_PROJECT_ID`** - Your Google Cloud project ID
+- **`GCP_SA_KEY`** - Service account key JSON file content
 
-```dockerfile
-FROM node:18-alpine
-WORKDIR /app
-COPY package*.json ./
-RUN npm ci --only=production
-COPY . .
-RUN npm run build
-EXPOSE 3000
-CMD ["npm", "run", "preview"]
+#### Manual Deployment:
+```bash
+# Build and deploy manually
+gcloud run deploy portfolio \
+  --source . \
+  --platform managed \
+  --region us-central1 \
+  --allow-unauthenticated \
+  --port 8080
 ```
 
 ## License
@@ -321,4 +403,4 @@ Distributed under the MIT License. See `LICENSE` for more information.
 - 💼 [LinkedIn](https://www.linkedin.com/in/kenneth-chua/)
 - 💻 [GitHub](https://github.com/kennethchua1998)
 - 🌍 Location: Penang, Malaysia
-- 🔗 Portfolio: [Live Demo](https://your-portfolio-url.com)
+- 🔗 Portfolio: [Live Demo](https://kennethchua.com)
