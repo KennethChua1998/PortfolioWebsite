@@ -10,7 +10,7 @@
             {{ footerData.title }}
           </p>
         </div>
-        
+
         <div class="flex space-x-6">
           <a
             :href="footerData.contactInfo.github"
@@ -20,7 +20,7 @@
           >
             <Github :size="20" />
           </a>
-          
+
           <a
             :href="footerData.contactInfo.linkedin"
             target="_blank"
@@ -29,7 +29,7 @@
           >
             <Linkedin :size="20" />
           </a>
-          
+
           <a
             :href="`mailto:${footerData.contactInfo.email}`"
             class="text-gray-400 hover:text-emerald-400 transition-colors"
@@ -38,10 +38,11 @@
           </a>
         </div>
       </div>
-      
+
       <div class="mt-8 pt-8 border-t border-gray-800 text-center">
         <p class="text-gray-500 text-sm">
-          © {{ currentYear }} {{ footerData.name }}. {{ footerData.copyright }}.
+          © {{ currentYear }} {{ footerData.name }}.
+          {{ footerData.copyright }}.
         </p>
       </div>
     </div>

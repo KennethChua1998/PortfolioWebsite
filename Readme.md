@@ -1,26 +1,28 @@
 # Kenneth Chua - Personal Portfolio
 
-A modern, interactive portfolio website showcasing my expertise as a Cloud Specialist and Full-Stack Developer. This project demonstrates proficiency in modern web technologies and cloud-based solutions.
+Modern Vue.js website with Three.js WebGL animations and responsive design. You are currently viewing this project.
 
-**Cloud Specialist @ PointStar | Google Cloud Professional Developer**
+**Cloud Specialist @ PointStar | Google Cloud Professional Certified**
 
 ## About Kenneth
 
-Passionate Software Engineer specializing in cloud-based solutions with 4+ years of experience delivering enterprise-grade applications. Currently serving as a Cloud Specialist at PointStar, focusing on Google Cloud technologies, AI/ML integration, and DevOps CI/CD implementations.
+Passionate Software Engineer specializing in cloud-based solutions with 4+ years of experience developing and delivering applications. Currently serving as a Cloud Specialist at PointStar, focusing on Google Cloud technologies.
+
+I specialize in AI/ML integration, API development, and DevOps CI/CD implementations. My technical expertise includes full-stack development with modern JavaScript frameworks, Python automation, and cloud application modernization.
 
 **Key Achievements:**
-- Technical Lead for Full Stack Project delivered to Singapore Government Agency
-- Google Cloud Professional Cloud Architect & Developer Certified
-- Delivered multiple Python automation projects and no-code solutions
+- Technical Lead for full-stack projects in cross-functional teams
+- Google Cloud Professional Certified
+- Delivered Python automation solutions and no-code platforms
 
 ## Features
 
-- **Interactive Hero Section:** A captivating, full-screen digital playground built with WebGL, featuring a dynamic particle nebula that reacts to mouse movements and clicks.
-- **Smooth Scrolling Single-Page Application:** A seamless user experience with smooth scrolling navigation between sections.
-- **Animated Sections:** Sections and elements animate into view as the user scrolls, creating a dynamic and engaging experience.
-- **Modern UI/UX:** A clean and modern design built with `shadcn-vue` and Tailwind CSS.
-- **Featured Projects:** A grid of my best projects with details and links to live demos and GitHub repositories.
-- **Contact Form:** A functional contact form for easy communication.
+- **WebGL Three.js Animation:** Interactive hero section with mouse-responsive particle system
+- **Glass-morphism Design:** Modern UI with glass-effect components and smooth animations
+- **Vue 3 Composition API:** Built with modern Vue.js patterns and reactive state management
+- **Section-based Data Architecture:** No static text in templates - all content organized in data files
+- **Web3Forms Integration:** Functional contact form with real-time submission
+- **Development Tools:** ESLint, Prettier, and Vitest configured for code quality
 
 ## Technologies Used
 
@@ -130,62 +132,68 @@ This project follows modern Vue.js best practices with a well-structured data la
 - **Responsive design** with Tailwind CSS and glass-morphism effects
 
 ### Data Structure
-The portfolio uses a modular data approach organized by section for better maintainability:
+The portfolio uses a modular data approach organized by section. All data files are centralized in `src/data/` with no static text in templates:
 
-**`src/data/hero.js`** - Hero section content:
-```javascript
-export const heroData = {
-  name: "Kenneth",
-  title: "Software Engineer & Cloud Specialist",
-  subtitle: "Delivering Google Cloud solutions with 4+ years of experience...",
-  buttons: { projects: "View Projects", contact: "Get In Touch" }
-}
-```
-
-**`src/data/contact.js`** - Contact section content:
-```javascript
-export const contactData = {
-  title: "Get In Touch",
-  heading: "Let's work together",
-  description: "I'm always interested in new opportunities...",
-  contactInfo: { email, linkedin, github, linkedinDisplay },
-  form: { name: "Name", email: "Email", message: "Message", submit: "Send Message", submitting: "Sending..." }
-}
-```
-
-**`src/data/footer.js`** - Footer section content:
-```javascript
-export const footerData = {
-  name: "Kenneth",
-  title: "Cloud Specialist & Full-Stack Developer",
-  contactInfo: { email, linkedin, github }
-}
-```
-
-**`src/data/personal.js`** - About section personal information:
+**`src/data/personal.js`** - Central source of personal information:
 ```javascript
 export const personalInfo = {
-  name: "Kenneth",
-  description: [...], // Multi-paragraph bio
-  achievements: [...], // Key professional achievements
-  skills: [...] // Core technology skills array
+  name: 'Kenneth Chua',
+  firstName: 'Kenneth',
+  description: [
+    'Passionate Software Engineer specializing in cloud-based solutions with 4+ years of experience...',
+    'I specialize in AI/ML integration, API development, and DevOps CI/CD implementations...'
+  ],
+  achievements: [
+    'Technical Lead for full-stack projects in cross-functional teams',
+    'Google Cloud Professional Certified',
+    'Delivered Python automation solutions and no-code platforms'
+  ],
+  skills: ['Google Cloud Platform', 'JavaScript', 'Python', 'REST APIs', ...]
 }
 ```
 
-**`src/data/skills.js`** - Technical skills organized by category:
+**`src/data/hero.js`** - Hero section (imports name from personal.js):
 ```javascript
-// Exports: cloudSkills, backendSkills, frontendSkills, databaseSkills, toolsSkills
-// Each category includes: title, icon, color, skills array with levels
-// Plus certifications array with Google Cloud credentials
+import { personalInfo } from './personal.js'
+export const heroData = {
+  name: personalInfo.name,
+  title: 'Cloud Specialist & Full-Stack Software Engineer',
+  subtitle: 'Passionate about building scalable cloud solutions...',
+  buttons: { projects: 'View Projects', contact: 'Get In Touch' }
+}
 ```
 
-**`src/data/projects.js`** - Portfolio project showcase:
+**`src/data/contact.js`** - Contact section with Web3Forms integration:
+```javascript
+export const contactData = {
+  title: 'Get In Touch',
+  description: "I'm always interested in new opportunities and exciting projects...",
+  form: {
+    publicKey: '6b4a4d7c-bb9b-4c29-ac8e-80c3d79f9817',
+    apiUrl: 'https://api.web3forms.com/submit'
+  }
+}
+```
+
+**`src/data/footer.js`** - Footer section (imports name from personal.js):
+```javascript
+import { personalInfo } from './personal.js'
+export const footerData = {
+  name: personalInfo.name,
+  title: 'Cloud Specialist & Full-Stack Software Engineer',
+  contactInfo: { email: 'me@kennethchua.com', linkedin: '...', github: '...' }
+}
+```
+
+**`src/data/projects.js`** - Featured projects with enhanced descriptions:
 ```javascript
 export const projects = [
   {
-    id, title, description, technologies,
-    githubUrl, liveUrl, imageUrl, 
-    status, year, aiAssisted
+    title: 'Bursa Malaysia Website Scrapper',
+    description: 'Python web scraping script that extracts stock listings and financial data from the Bursa Malaysia website. Collects data for market analysis and research. Educational Purposes Only.',
+    technologies: ['Python', 'Selenium', 'Data Collection'],
+    githubUrl: 'https://github.com/KennethChua1998/BursaMalaysiaWebScrapper',
+    imageUrl: '/project_screenshot/bursa_scrapper.png'
   }
 ]
 ```
@@ -292,7 +300,7 @@ Distributed under the MIT License. See `LICENSE` for more information.
 
 ## Contact
 
-**Kenneth Chua** - Cloud Specialist & Full-Stack Developer
+**Kenneth Chua** - Cloud Specialist & Full-Stack Software Engineer
 
 - 📧 Email: me@kennethchua.com
 - 💼 [LinkedIn](https://www.linkedin.com/in/kenneth-chua/)

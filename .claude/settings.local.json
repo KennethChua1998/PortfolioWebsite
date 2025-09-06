@@ -21,7 +21,14 @@
       "Read(/C:\\Users\\Kenneth Chua\\Desktop\\Alternative Repos\\src\\components\\webgl/**)",
       "Read(/C:\\Users\\Kenneth Chua\\Desktop\\Alternative Repos\\src\\components\\sections/**)",
       "Read(/C:\\Users\\Kenneth Chua\\Desktop\\Alternative Repos\\src\\components\\sections/**)",
-      "Read(/C:\\Users\\Kenneth Chua\\Desktop\\Alternative Repos\\src\\components\\assets/**)"
+      "Read(/C:\\Users\\Kenneth Chua\\Desktop\\Alternative Repos\\src\\components\\assets/**)",
+      "Bash(npm run lint)",
+      "Bash(npm run format:*)",
+      "Bash(npm run test:*)",
+      "WebFetch(domain:github.com)",
+      "Bash(npm ls:*)",
+      "Bash(npm uninstall:*)",
+      "WebFetch(domain:eslint.vuejs.org)"
     ],
     "deny": [],
     "ask": []

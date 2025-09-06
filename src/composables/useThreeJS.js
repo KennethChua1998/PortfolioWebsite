@@ -8,7 +8,7 @@ export function useThreeJS() {
   const particles = ref()
   const animationId = ref()
 
-  const initScene = async (canvas) => {
+  const initScene = async canvas => {
     // Scene setup
     scene.value = new THREE.Scene()
 
@@ -37,8 +37,6 @@ export function useThreeJS() {
     window.addEventListener('mousemove', onMouseMove)
   }
 
-
-
   const onWindowResize = () => {
     if (!camera.value || !renderer.value) return
 
@@ -47,7 +45,7 @@ export function useThreeJS() {
     renderer.value.setSize(window.innerWidth, window.innerHeight)
   }
 
-  const onMouseMove = (event) => {
+  const onMouseMove = event => {
     if (!particles.value) return
 
     const mouseX = (event.clientX / window.innerWidth) * 2 - 1

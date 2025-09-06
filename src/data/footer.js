@@ -2,11 +2,11 @@ import { personalInfo } from './personal.js'
 
 export const footerData = {
   name: personalInfo.name,
-  title: "Cloud Specialist & Full-Stack Developer",
-  copyright: "All Rights Reserved",
+  title: 'Cloud Specialist & Full-Stack Software Engineer',
+  copyright: 'All Rights Reserved',
   contactInfo: {
-    email: "me@kennethchua.com",
-    linkedin: "https://www.linkedin.com/in/kenneth-chua/",
-    github: "https://github.com/kennethchua1998"
-  }
+    email: 'me@kennethchua.com',
+    linkedin: 'https://www.linkedin.com/in/kenneth-chua/',
+    github: 'https://github.com/kennethchua1998',
+  },
 }

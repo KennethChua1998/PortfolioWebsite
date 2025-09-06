@@ -1,10 +1,14 @@
 <template>
-  <section id="projects" class="py-20 glass-section relative overflow-hidden" ref="projectsSection">
+  <section
+    id="projects"
+    ref="projectsSection"
+    class="py-20 glass-section relative overflow-hidden"
+  >
     <div class="container mx-auto px-6">
       <h2 class="text-4xl font-bold text-center mb-16 text-emerald-400">
         Featured Projects
       </h2>
-      
+
       <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
         <div
           v-for="(project, index) in projects"
@@ -41,7 +45,7 @@ const animateProjects = () => {
 // Intersection Observer for scroll trigger
 const setupScrollTrigger = () => {
   const observer = new IntersectionObserver(
-    (entries) => {
+    entries => {
       entries.forEach(entry => {
         if (entry.isIntersecting && !isVisible.value) {
           isVisible.value = true
@@ -51,7 +55,7 @@ const setupScrollTrigger = () => {
     },
     { threshold: 0.2 }
   )
-  
+
   if (projectsSection.value) {
     observer.observe(projectsSection.value)
   }
@@ -79,7 +83,6 @@ onMounted(() => {
   transform: translateY(-10px) scale(1.03);
   transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
-
 
 /* 3D entrance effects */
 .project-wrapper:nth-child(even) {

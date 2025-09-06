@@ -2,13 +2,11 @@
   <header class="fixed top-0 w-full z-50 glass-section">
     <nav class="section-container py-4">
       <div class="flex items-center justify-between">
-        <div class="text-xl font-bold text-emerald-400">
-          KC
-        </div>
-        
+        <div class="text-xl font-bold text-emerald-400">KC</div>
+
         <ul class="hidden md:flex space-x-2">
           <li v-for="item in navItems" :key="item.label">
-            <a 
+            <a
               :href="item.href"
               class="glass-card px-4 py-2 rounded-lg text-gray-300 hover:text-emerald-400 transition-all duration-300 glass-hover"
               @click="smoothScroll"
@@ -17,20 +15,20 @@
             </a>
           </li>
         </ul>
-        
-        <button 
-          @click="toggleMobileMenu"
+
+        <button
           class="md:hidden glass-card p-2 rounded-lg text-gray-300 hover:text-emerald-400 transition-all duration-300 glass-hover"
+          @click="toggleMobileMenu"
         >
           <Menu :size="24" />
         </button>
       </div>
-      
+
       <!-- Mobile Menu -->
       <div v-if="isMobileMenuOpen" class="md:hidden mt-4 pb-4">
         <ul class="space-y-2">
           <li v-for="item in navItems" :key="item.label">
-            <a 
+            <a
               :href="item.href"
               class="glass-card block px-4 py-3 rounded-lg text-gray-300 hover:text-emerald-400 transition-all duration-300 glass-hover"
               @click="closeMobileMenu"
@@ -64,7 +62,7 @@ const closeMobileMenu = () => {
   isMobileMenuOpen.value = false
 }
 
-const smoothScroll = (event) => {
+const smoothScroll = event => {
   event.preventDefault()
   const target = event.target
   const element = document.querySelector(target.getAttribute('href'))

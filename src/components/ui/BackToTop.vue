@@ -9,13 +9,13 @@
   >
     <button
       v-if="showBackToTop"
-      @click="scrollToTop"
       class="fixed bottom-8 right-8 z-50 glass-card p-4 rounded-full text-white hover:text-gray-200 transition-all duration-300 group"
       aria-label="Back to top"
+      @click="scrollToTop"
     >
-      <ChevronUp 
-        :size="24" 
-        class="transform group-hover:scale-110 transition-transform duration-300" 
+      <ChevronUp
+        :size="24"
+        class="transform group-hover:scale-110 transition-transform duration-300"
       />
     </button>
   </Transition>
@@ -34,7 +34,7 @@ const handleScroll = () => {
 const scrollToTop = () => {
   window.scrollTo({
     top: 0,
-    behavior: 'smooth'
+    behavior: 'smooth',
   })
 }
 

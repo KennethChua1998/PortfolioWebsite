@@ -1,43 +1,57 @@
 <template>
-  <section id="about" class="py-20 glass-section relative overflow-hidden" ref="aboutSection">
+  <section
+    id="about"
+    ref="aboutSection"
+    class="py-20 glass-section relative overflow-hidden"
+  >
     <div class="section-container">
       <div class="max-w-4xl mx-auto">
-        <h2 class="text-4xl font-bold text-center mb-16 text-emerald-400 about-title"
-            :class="{ 'animate-in': isVisible }">
+        <h2
+          class="text-4xl font-bold text-center mb-16 text-emerald-400 about-title"
+          :class="{ 'animate-in': isVisible }"
+        >
           About {{ personalInfo.firstName }}
         </h2>
-        
+
         <div class="grid md:grid-cols-2 gap-12 items-center">
           <div class="space-y-6">
-            <p 
-              v-for="(desc, index) in personalInfo.description" 
+            <p
+              v-for="(desc, index) in personalInfo.description"
               :key="index"
               class="text-lg text-gray-200 leading-relaxed text-justify about-text"
               :class="{ 'animate-in': animatedElements[`text${index + 1}`] }"
             >
               {{ desc }}
             </p>
-            
-            <div class="about-glass-card p-8 rounded-xl mt-8 relative z-10 achievements-card"
-                 :class="{ 'animate-in': animatedElements.achievements }">
-              <h3 class="text-xl font-semibold text-emerald-300 mb-4">Key Achievements</h3>
+
+            <div
+              class="about-glass-card p-8 rounded-xl mt-8 relative z-10 achievements-card"
+              :class="{ 'animate-in': animatedElements.achievements }"
+            >
+              <h3 class="text-xl font-semibold text-emerald-300 mb-4">
+                Key Achievements
+              </h3>
               <ul class="space-y-2 text-gray-300">
-                <li 
-                  v-for="(achievement, index) in personalInfo.achievements" 
+                <li
+                  v-for="(achievement, index) in personalInfo.achievements"
                   :key="index"
                   class="flex items-start gap-2 achievement-item"
-                  :class="{ 'animate-in': animatedElements[`achievement${index + 1}`] }"
+                  :class="{
+                    'animate-in': animatedElements[`achievement${index + 1}`],
+                  }"
                 >
                   <span class="text-green-400 mt-1">•</span>
                   {{ achievement }}
                 </li>
               </ul>
             </div>
-            
-            <div class="flex flex-wrap gap-2 skills-container"
-                 :class="{ 'animate-in': animatedElements.skills }">
-              <span 
-                v-for="(skill, index) in personalInfo.skills" 
+
+            <div
+              class="flex flex-wrap gap-2 skills-container"
+              :class="{ 'animate-in': animatedElements.skills }"
+            >
+              <span
+                v-for="(skill, index) in personalInfo.skills"
                 :key="skill"
                 class="px-4 py-2 skill-pill text-emerald-300 rounded-full text-sm"
                 :class="{ 'animate-in': animatedElements[`skill${index}`] }"
@@ -47,17 +61,28 @@
               </span>
             </div>
           </div>
-          
-          <div class="relative profile-section"
-               :class="{ 'animate-in': animatedElements.profile }">
-            <div class="w-80 h-80 mx-auto bg-gradient-to-br from-primary-600 to-accent-600 rounded-full opacity-20 blur-3xl"></div>
+
+          <div
+            class="relative profile-section"
+            :class="{ 'animate-in': animatedElements.profile }"
+          >
+            <div
+              class="w-80 h-80 mx-auto bg-gradient-to-br from-primary-600 to-accent-600 rounded-full opacity-20 blur-3xl"
+            ></div>
             <div class="absolute inset-0 flex items-center justify-center">
-              <div class="w-64 h-64 rounded-full glass-border overflow-hidden shadow-2xl">
-                <img 
-                  src="/profile_pic.png" 
+              <div
+                class="w-64 h-64 rounded-full glass-border overflow-hidden shadow-2xl"
+              >
+                <img
+                  src="/profile_pic.png"
                   alt="Kenneth Chua Profile Picture"
                   class="w-full h-full object-cover object-center"
-                  style="image-rendering: auto; transform: none; filter: none; will-change: auto;"
+                  style="
+                    image-rendering: auto;
+                    transform: none;
+                    filter: none;
+                    will-change: auto;
+                  "
                   width="256"
                   height="256"
                 />
@@ -84,7 +109,7 @@ onMounted(() => {
 
 const setupScrollTrigger = () => {
   const observer = new IntersectionObserver(
-    (entries) => {
+    entries => {
       entries.forEach(entry => {
         if (entry.isIntersecting && !isVisible.value) {
           isVisible.value = true
@@ -94,7 +119,7 @@ const setupScrollTrigger = () => {
     },
     { threshold: 0.2 }
   )
-  
+
   if (aboutSection.value) {
     observer.observe(aboutSection.value)
   }
@@ -110,7 +135,7 @@ const triggerAnimations = () => {
     { key: 'achievement3', delay: 1000 },
     { key: 'achievement4', delay: 1100 },
     { key: 'skills', delay: 1300 },
-    { key: 'profile', delay: 1500 }
+    { key: 'profile', delay: 1500 },
   ]
 
   animations.forEach(({ key, delay }) => {
@@ -120,22 +145,27 @@ const triggerAnimations = () => {
   })
 
   personalInfo.skills.forEach((skill, index) => {
-    setTimeout(() => {
-      animatedElements.value[`skill${index}`] = true
-    }, 1400 + (index * 50))
+    setTimeout(
+      () => {
+        animatedElements.value[`skill${index}`] = true
+      },
+      1400 + index * 50
+    )
   })
 }
 </script>
 
 <style scoped>
 .about-glass-card {
-  background: linear-gradient(135deg, 
+  background: linear-gradient(
+    135deg,
     rgba(59, 130, 246, 0.1) 0%,
     rgba(147, 51, 234, 0.05) 50%,
-    rgba(15, 23, 42, 0.1) 100%);
+    rgba(15, 23, 42, 0.1) 100%
+  );
   backdrop-filter: blur(25px) saturate(200%);
   border: 1px solid rgba(255, 255, 255, 0.15);
-  box-shadow: 
+  box-shadow:
     0 12px 40px rgba(59, 130, 246, 0.15),
     0 8px 16px rgba(0, 0, 0, 0.3),
     inset 0 1px 0 rgba(255, 255, 255, 0.2),
@@ -146,7 +176,7 @@ const triggerAnimations = () => {
   background: rgba(15, 23, 42, 0.05);
   backdrop-filter: blur(20px) saturate(180%);
   border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 
+  box-shadow:
     0 8px 32px rgba(0, 0, 0, 0.3),
     inset 0 1px 0 rgba(255, 255, 255, 0.1);
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
@@ -155,10 +185,12 @@ const triggerAnimations = () => {
 }
 
 .skill-pill:hover {
-  background: linear-gradient(135deg, 
+  background: linear-gradient(
+    135deg,
     rgba(59, 130, 246, 0.15) 0%,
     rgba(147, 51, 234, 0.1) 50%,
-    rgba(15, 23, 42, 0.15) 100%);
+    rgba(15, 23, 42, 0.15) 100%
+  );
   backdrop-filter: blur(35px) saturate(220%);
   border-color: rgba(59, 130, 246, 0.3);
   transform: translateY(-1px);
@@ -239,13 +271,15 @@ const triggerAnimations = () => {
 
 /* Glass border for profile picture */
 .glass-border {
-  background: linear-gradient(135deg, 
+  background: linear-gradient(
+    135deg,
     rgba(255, 255, 255, 0.1) 0%,
     rgba(255, 255, 255, 0.05) 50%,
-    rgba(255, 255, 255, 0.1) 100%);
+    rgba(255, 255, 255, 0.1) 100%
+  );
   backdrop-filter: blur(20px) saturate(180%);
   border: 2px solid rgba(255, 255, 255, 0.2);
-  box-shadow: 
+  box-shadow:
     0 8px 32px rgba(59, 130, 246, 0.15),
     0 4px 16px rgba(0, 0, 0, 0.3),
     inset 0 1px 0 rgba(255, 255, 255, 0.3),
@@ -258,12 +292,16 @@ const triggerAnimations = () => {
   position: absolute;
   inset: -2px;
   padding: 2px;
-  background: linear-gradient(135deg, 
+  background: linear-gradient(
+    135deg,
     rgba(59, 130, 246, 0.3) 0%,
     rgba(147, 51, 234, 0.2) 50%,
-    rgba(59, 130, 246, 0.3) 100%);
+    rgba(59, 130, 246, 0.3) 100%
+  );
   border-radius: inherit;
-  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
   mask-composite: exclude;
 }
 
@@ -273,7 +311,8 @@ const triggerAnimations = () => {
 }
 
 @keyframes subtlePulse {
-  0%, 100% {
+  0%,
+  100% {
     opacity: 0.9;
     transform: scale(1);
   }

@@ -20,7 +20,6 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
 import { onMounted } from 'vue'
 import { useThemeStore } from '@/stores/theme.js'
 import AppHeader from '@/components/layout/AppHeader.vue'

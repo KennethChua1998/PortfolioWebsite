@@ -9,7 +9,7 @@ export const useThemeStore = defineStore('theme', () => {
   const theme = computed(() => ({
     isDark: isDark.value,
     primaryColor: primaryColor.value,
-    accentColor: accentColor.value
+    accentColor: accentColor.value,
   }))
 
   const initTheme = () => {
@@ -35,11 +35,14 @@ export const useThemeStore = defineStore('theme', () => {
   }
 
   const saveTheme = () => {
-    localStorage.setItem('portfolio-theme', JSON.stringify({
-      isDark: isDark.value,
-      primaryColor: primaryColor.value,
-      accentColor: accentColor.value
-    }))
+    localStorage.setItem(
+      'portfolio-theme',
+      JSON.stringify({
+        isDark: isDark.value,
+        primaryColor: primaryColor.value,
+        accentColor: accentColor.value,
+      })
+    )
   }
 
   return {
@@ -49,6 +52,6 @@ export const useThemeStore = defineStore('theme', () => {
     theme,
     initTheme,
     toggleTheme,
-    updateColors
+    updateColors,
   }
 })

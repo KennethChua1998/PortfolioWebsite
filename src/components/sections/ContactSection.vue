@@ -5,7 +5,7 @@
         <h2 class="text-4xl font-bold text-center mb-16 text-emerald-400">
           {{ contactData.title }}
         </h2>
-        
+
         <div class="grid md:grid-cols-2 gap-12">
           <!-- Contact Info -->
           <div class="space-y-8">
@@ -17,21 +17,21 @@
                 {{ contactData.description }}
               </p>
             </div>
-            
+
             <div class="space-y-4">
               <div class="flex items-center gap-4">
                 <Mail :size="20" class="text-emerald-400" />
-                <a 
+                <a
                   :href="`mailto:${contactData.contactInfo.email}`"
                   class="text-gray-200 hover:text-emerald-400 transition-colors"
                 >
                   {{ contactData.contactInfo.email }}
                 </a>
               </div>
-              
+
               <div class="flex items-center gap-4">
                 <Linkedin :size="20" class="text-emerald-400" />
-                <a 
+                <a
                   :href="contactData.contactInfo.linkedin"
                   target="_blank"
                   rel="noopener noreferrer"
@@ -40,38 +40,48 @@
                   {{ contactData.contactInfo.linkedinDisplay }}
                 </a>
               </div>
-              
+
               <div class="flex items-center gap-4">
                 <Github :size="20" class="text-emerald-400" />
-                <a 
+                <a
                   :href="contactData.contactInfo.github"
                   target="_blank"
                   rel="noopener noreferrer"
                   class="text-gray-200 hover:text-emerald-400 transition-colors"
                 >
-                  {{ contactData.contactInfo.github.replace('https://github.com/', 'github.com/') }}
+                  {{
+                    contactData.contactInfo.github.replace(
+                      'https://github.com/',
+                      'github.com/'
+                    )
+                  }}
                 </a>
               </div>
             </div>
           </div>
-          
+
           <!-- Contact Form -->
           <div class="contact-form p-10 rounded-2xl relative z-10">
             <!-- Success/Error Message -->
-            <div 
-              v-if="showMessage" 
+            <div
+              v-if="showMessage"
               class="mb-6 p-4 rounded-lg transition-all duration-300"
               :class="{
-                'bg-green-900/20 border border-green-500/30 text-green-300': messageType === 'success',
-                'bg-red-900/20 border border-red-500/30 text-red-300': messageType === 'error'
+                'bg-green-900/20 border border-green-500/30 text-green-300':
+                  messageType === 'success',
+                'bg-red-900/20 border border-red-500/30 text-red-300':
+                  messageType === 'error',
               }"
             >
               <p class="text-sm">{{ messageText }}</p>
             </div>
-            
-            <form @submit.prevent="handleSubmit" class="space-y-6">
+
+            <form class="space-y-6" @submit.prevent="handleSubmit">
               <div>
-                <label for="name" class="block text-sm font-medium text-gray-200 mb-2">
+                <label
+                  for="name"
+                  class="block text-sm font-medium text-gray-200 mb-2"
+                >
                   {{ contactData.form.name }}
                 </label>
                 <input
@@ -80,11 +90,14 @@
                   type="text"
                   required
                   class="w-full px-4 py-3 glass-input text-white rounded-lg border-0 focus:outline-none transition-all duration-300"
-                >
+                />
               </div>
-              
+
               <div>
-                <label for="email" class="block text-sm font-medium text-gray-200 mb-2">
+                <label
+                  for="email"
+                  class="block text-sm font-medium text-gray-200 mb-2"
+                >
                   {{ contactData.form.email }}
                 </label>
                 <input
@@ -93,11 +106,14 @@
                   type="email"
                   required
                   class="w-full px-4 py-3 glass-input text-white rounded-lg border-0 focus:outline-none transition-all duration-300"
-                >
+                />
               </div>
-              
+
               <div>
-                <label for="message" class="block text-sm font-medium text-gray-200 mb-2">
+                <label
+                  for="message"
+                  class="block text-sm font-medium text-gray-200 mb-2"
+                >
                   {{ contactData.form.message }}
                 </label>
                 <textarea
@@ -108,13 +124,17 @@
                   class="w-full px-4 py-3 glass-input text-white rounded-lg border-0 focus:outline-none transition-all duration-300 resize-none"
                 ></textarea>
               </div>
-              
+
               <button
                 type="submit"
                 :disabled="isSubmitting"
                 class="w-full glass-card px-6 py-3 rounded-lg font-medium text-emerald-400 hover:text-white transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                {{ isSubmitting ? contactData.form.submitting : contactData.form.submit }}
+                {{
+                  isSubmitting
+                    ? contactData.form.submitting
+                    : contactData.form.submit
+                }}
               </button>
             </form>
           </div>
@@ -132,7 +152,7 @@ import { contactData } from '@/data/contact.js'
 const form = ref({
   name: '',
   email: '',
-  message: ''
+  message: '',
 })
 
 const isSubmitting = ref(false)
@@ -143,25 +163,25 @@ const messageText = ref('')
 // Form validation
 const validateForm = () => {
   const errors = []
-  
+
   if (!form.value.name.trim()) {
     errors.push(contactData.messages.validation.nameRequired)
   }
-  
+
   if (!form.value.email.trim()) {
     errors.push(contactData.messages.validation.emailRequired)
   } else if (!isValidEmail(form.value.email)) {
     errors.push(contactData.messages.validation.emailInvalid)
   }
-  
+
   if (!form.value.message.trim()) {
     errors.push(contactData.messages.validation.messageRequired)
   }
-  
+
   return errors
 }
 
-const isValidEmail = (email) => {
+const isValidEmail = email => {
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
   return emailRegex.test(email)
 }
@@ -170,7 +190,7 @@ const showNotification = (type, text) => {
   messageType.value = type
   messageText.value = text
   showMessage.value = true
-  
+
   // Hide message after 5 seconds
   setTimeout(() => {
     showMessage.value = false
@@ -186,7 +206,7 @@ const handleSubmit = async () => {
   }
 
   isSubmitting.value = true
-  
+
   try {
     // Prepare form data for Web3Forms
     const formData = new FormData()
@@ -196,27 +216,26 @@ const handleSubmit = async () => {
     formData.append('message', form.value.message)
     formData.append('from_name', 'Portfolio Contact Form')
     formData.append('subject', `New message from ${form.value.name}`)
-    
+
     // Submit to Web3Forms
     const response = await fetch(contactData.form.apiUrl, {
       method: 'POST',
-      body: formData
+      body: formData,
     })
-    
+
     const result = await response.json()
-    
+
     if (result.success) {
       // Success - reset form and show success message
       form.value = {
         name: '',
         email: '',
-        message: ''
+        message: '',
       }
       showNotification('success', contactData.messages.success)
     } else {
       throw new Error(result.message || 'Form submission failed')
     }
-    
   } catch (error) {
     console.error('Form submission error:', error)
     showNotification('error', contactData.messages.error)
@@ -228,13 +247,15 @@ const handleSubmit = async () => {
 
 <style scoped>
 .contact-form {
-  background: linear-gradient(145deg,
+  background: linear-gradient(
+    145deg,
     rgba(59, 130, 246, 0.08) 0%,
     rgba(15, 23, 42, 0.1) 50%,
-    rgba(147, 51, 234, 0.06) 100%);
+    rgba(147, 51, 234, 0.06) 100%
+  );
   backdrop-filter: blur(30px) saturate(180%);
   border: 1px solid rgba(255, 255, 255, 0.12);
-  box-shadow: 
+  box-shadow:
     0 20px 60px rgba(59, 130, 246, 0.2),
     0 8px 16px rgba(0, 0, 0, 0.4),
     inset 0 1px 0 rgba(255, 255, 255, 0.15);
@@ -244,7 +265,7 @@ const handleSubmit = async () => {
   background: rgba(15, 23, 42, 0.05);
   backdrop-filter: blur(20px) saturate(180%);
   border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 
+  box-shadow:
     0 8px 32px rgba(0, 0, 0, 0.3),
     inset 0 1px 0 rgba(255, 255, 255, 0.1);
 }
