@@ -90,7 +90,6 @@ describe('ProjectCard', () => {
     const img = wrapper.find('img')
     
     // Simulate the error event by calling the handleImageError method directly
-    const mockEvent = { target: { src: '/test-image.png', style: {} } }
     await img.trigger('error')
     
     // The actual implementation would be tested by triggering a real error
