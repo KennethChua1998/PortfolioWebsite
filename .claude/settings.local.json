@@ -28,7 +28,8 @@
       "WebFetch(domain:github.com)",
       "Bash(npm ls:*)",
       "Bash(npm uninstall:*)",
-      "WebFetch(domain:eslint.vuejs.org)"
+      "WebFetch(domain:eslint.vuejs.org)",
+      "Bash(gcloud artifacts repositories list:*)"
     ],
     "deny": [],
     "ask": []
