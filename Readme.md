@@ -11,6 +11,7 @@ Passionate Software Engineer specializing in cloud-based solutions with 4+ years
 I specialize in AI/ML integration, API development, and DevOps CI/CD implementations. My technical expertise includes full-stack development with modern JavaScript frameworks, Python automation, and cloud application modernization.
 
 **Key Achievements:**
+
 - Technical Lead for full-stack projects in cross-functional teams
 - Google Cloud Professional Certified
 - Delivered Python automation solutions and no-code platforms
@@ -126,15 +127,18 @@ npm run format
 This project follows modern Vue.js best practices with a well-structured data layer:
 
 ### Vue.js Architecture
+
 - **Single File Components** with `<script setup>` syntax
 - **Composition API** for better logic reuse and state management
 - **Component-based architecture** with clear separation of concerns
 - **Responsive design** with Tailwind CSS and glass-morphism effects
 
 ### Data Structure
+
 The portfolio uses a modular data approach organized by section. All data files are centralized in `src/data/` with no static text in templates:
 
 **`src/data/personal.js`** - Central source of personal information:
+
 ```javascript
 export const personalInfo = {
   name: 'Kenneth Chua',
@@ -153,63 +157,71 @@ export const personalInfo = {
 ```
 
 **`src/data/hero.js`** - Hero section (imports name from personal.js):
+
 ```javascript
 import { personalInfo } from './personal.js'
 export const heroData = {
   name: personalInfo.name,
   title: 'Cloud Specialist & Full-Stack Software Engineer',
   subtitle: 'Passionate about building scalable cloud solutions...',
-  buttons: { projects: 'View Projects', contact: 'Get In Touch' }
+  buttons: { projects: 'View Projects', contact: 'Get In Touch' },
 }
 ```
 
 **`src/data/contact.js`** - Contact section with Web3Forms integration:
+
 ```javascript
 export const contactData = {
   title: 'Get In Touch',
-  description: "I'm always interested in new opportunities and exciting projects...",
+  description:
+    "I'm always interested in new opportunities and exciting projects...",
   form: {
     publicKey: '6b4a4d7c-bb9b-4c29-ac8e-80c3d79f9817',
-    apiUrl: 'https://api.web3forms.com/submit'
-  }
+    apiUrl: 'https://api.web3forms.com/submit',
+  },
 }
 ```
 
 **`src/data/footer.js`** - Footer section (imports name from personal.js):
+
 ```javascript
 import { personalInfo } from './personal.js'
 export const footerData = {
   name: personalInfo.name,
   title: 'Cloud Specialist & Full-Stack Software Engineer',
-  contactInfo: { email: 'me@kennethchua.com', linkedin: '...', github: '...' }
+  contactInfo: { email: 'me@kennethchua.com', linkedin: '...', github: '...' },
 }
 ```
 
 **`src/data/projects.js`** - Featured projects with enhanced descriptions:
+
 ```javascript
 export const projects = [
   {
     title: 'Bursa Malaysia Website Scrapper',
-    description: 'Python web scraping script that extracts stock listings and financial data from the Bursa Malaysia website. Collects data for market analysis and research. Educational Purposes Only.',
+    description:
+      'Python web scraping script that extracts stock listings and financial data from the Bursa Malaysia website. Collects data for market analysis and research. Educational Purposes Only.',
     technologies: ['Python', 'Selenium', 'Data Collection'],
     githubUrl: 'https://github.com/KennethChua1998/BursaMalaysiaWebScrapper',
-    imageUrl: '/project_screenshot/bursa_scrapper.png'
-  }
+    imageUrl: '/project_screenshot/bursa_scrapper.png',
+  },
 ]
 ```
 
 ### Component Integration
+
 Each component imports data from its corresponding section-specific data file:
 
 - **HeroSection.vue**: Uses `heroData` for name, title, subtitle, and button text
 - **ContactSection.vue**: Uses `contactData` for titles, descriptions, contact info, and form labels
 - **AppFooter.vue**: Uses `footerData` for footer content and social links
 - **AboutSection.vue**: Uses `personalInfo` for bio, achievements, and skills with scroll animations
-- **SkillsSection.vue**: Uses skill category exports with progress indicators  
+- **SkillsSection.vue**: Uses skill category exports with progress indicators
 - **ProjectsSection.vue**: Uses `projects` array for project cards with technology badges
 - **WebGL Integration**: Three.js particle system with interactive mouse animations
 
 ### Benefits of Section-Based Data Organization
+
 - **Maintainability**: Easy to update content for specific sections
 - **Scalability**: Add new sections without affecting existing data
 - **Developer Experience**: Clear separation of concerns
@@ -223,6 +235,7 @@ Each component imports data from its corresponding section-specific data file:
 All text content must be stored in the corresponding data files:
 
 ### ✅ Correct Approach:
+
 ```vue
 <!-- ✅ GOOD: Text from data file -->
 <h1>{{ heroData.name }}</h1>
@@ -231,6 +244,7 @@ All text content must be stored in the corresponding data files:
 ```
 
 ### ❌ Incorrect Approach:
+
 ```vue
 <!-- ❌ BAD: Hardcoded static text -->
 <h1>Kenneth Chua</h1>
@@ -239,6 +253,7 @@ All text content must be stored in the corresponding data files:
 ```
 
 ### Why This Matters:
+
 - **Content Management**: All content changes happen in one place (data files)
 - **Consistency**: Prevents text duplication and inconsistencies
 - **Internationalization**: Makes future i18n implementation easy
@@ -246,11 +261,11 @@ All text content must be stored in the corresponding data files:
 - **Non-technical Updates**: Content can be updated without touching Vue components
 
 ### Data File Mapping:
+
 - Names, titles, descriptions → Use full names from data files
 - Button text → Store in respective section data
 - Form labels → Store in `contactData.form`
 - Error messages → Store in data files (not hardcoded)
-
 
 ## Contributing
 
