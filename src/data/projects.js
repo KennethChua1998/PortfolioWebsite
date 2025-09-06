@@ -4,7 +4,7 @@ export const projects = [
     title: 'Interactive Portfolio Website',
     description:
       'Personal portfolio showcasing modern web development skills. Built with Vue.js 3 and Three.js for interactive WebGL animations, featuring smooth scrolling and responsive glass-effect design.',
-    technologies: ['Vue.js 3', 'Three.js', 'Tailwind CSS', 'WebGL', 'Vitest'],
+    technologies: ['Vue.js 3', 'Three.js', 'Tailwind CSS', 'WebGL', 'CI/CD'],
     githubUrl: 'https://github.com/KennethChua1998/Portfolio-Website',
     liveUrl: 'https://kennethchua.com',
     imageUrl: '/project_screenshot/portfolio_website.png',
