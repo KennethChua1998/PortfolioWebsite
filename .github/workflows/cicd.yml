@@ -75,13 +75,6 @@ jobs:
         with:
           project_id: ${{ secrets.GCP_PROJECT_ID }}
 
-      - name: Create Artifact Registry repository if needed
-        run: |
-          gcloud artifacts repositories create portfolio \
-            --repository-format=docker \
-            --location=$REGION \
-            --description="Portfolio application repository" || true
-
       - name: Configure Docker for Artifact Registry
         run: gcloud auth configure-docker $REGION-docker.pkg.dev
 
