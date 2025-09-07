@@ -2,13 +2,15 @@
   <header class="fixed top-0 w-full z-50 glass-section">
     <nav class="section-container py-4">
       <div class="flex items-center justify-between">
-        <div class="text-xl font-bold text-emerald-400">KC</div>
+        <a href="#hero" class="flex items-center hover:opacity-80 transition-opacity duration-300" @click="scrollToTop">
+          <img src="/favicon.svg?v=1" alt="Website Logo" class="w-8 h-8" />
+        </a>
 
         <ul class="hidden md:flex space-x-2">
           <li v-for="item in navItems" :key="item.label">
             <a
               :href="item.href"
-              class="glass-card px-4 py-2 rounded-lg text-gray-300 hover:text-emerald-400 transition-all duration-300 glass-hover"
+              class="px-4 py-2 rounded-lg text-gray-300 hover:text-emerald-400 hover:bg-emerald-400/10 transition-all duration-300"
               @click="smoothScroll"
             >
               {{ item.label }}
@@ -17,7 +19,7 @@
         </ul>
 
         <button
-          class="md:hidden glass-card p-2 rounded-lg text-gray-300 hover:text-emerald-400 transition-all duration-300 glass-hover"
+          class="md:hidden p-2 rounded-lg text-gray-300 hover:text-emerald-400 hover:bg-emerald-400/10 transition-all duration-300"
           @click="toggleMobileMenu"
         >
           <Menu :size="24" />
@@ -30,7 +32,7 @@
           <li v-for="item in navItems" :key="item.label">
             <a
               :href="item.href"
-              class="glass-card block px-4 py-3 rounded-lg text-gray-300 hover:text-emerald-400 transition-all duration-300 glass-hover"
+              class="block px-4 py-3 rounded-lg text-gray-300 hover:text-emerald-400 hover:bg-emerald-400/10 transition-all duration-300"
               @click="closeMobileMenu"
             >
               {{ item.label }}
@@ -60,6 +62,11 @@ const toggleMobileMenu = () => {
 
 const closeMobileMenu = () => {
   isMobileMenuOpen.value = false
+}
+
+const scrollToTop = event => {
+  event.preventDefault()
+  window.scrollTo({ top: 0, behavior: 'smooth' })
 }
 
 const smoothScroll = event => {

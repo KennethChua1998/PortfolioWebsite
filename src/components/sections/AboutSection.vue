@@ -159,14 +159,14 @@ const triggerAnimations = () => {
 .about-glass-card {
   background: linear-gradient(
     135deg,
-    rgba(59, 130, 246, 0.1) 0%,
-    rgba(147, 51, 234, 0.05) 50%,
+    rgba(255, 255, 255, 0.1) 0%,
+    rgba(255, 255, 255, 0.05) 50%,
     rgba(15, 23, 42, 0.1) 100%
   );
   backdrop-filter: blur(25px) saturate(200%);
   border: 1px solid rgba(255, 255, 255, 0.15);
   box-shadow:
-    0 12px 40px rgba(59, 130, 246, 0.15),
+    0 12px 40px rgba(0, 0, 0, 0.15),
     0 8px 16px rgba(0, 0, 0, 0.3),
     inset 0 1px 0 rgba(255, 255, 255, 0.2),
     inset 0 -1px 0 rgba(255, 255, 255, 0.05);
@@ -187,12 +187,12 @@ const triggerAnimations = () => {
 .skill-pill:hover {
   background: linear-gradient(
     135deg,
-    rgba(59, 130, 246, 0.15) 0%,
-    rgba(147, 51, 234, 0.1) 50%,
+    rgba(255, 255, 255, 0.15) 0%,
+    rgba(255, 255, 255, 0.1) 50%,
     rgba(15, 23, 42, 0.15) 100%
   );
   backdrop-filter: blur(35px) saturate(220%);
-  border-color: rgba(59, 130, 246, 0.3);
+  border-color: rgba(255, 255, 255, 0.3);
   transform: translateY(-1px);
 }
 
@@ -280,7 +280,7 @@ const triggerAnimations = () => {
   backdrop-filter: blur(20px) saturate(180%);
   border: 2px solid rgba(255, 255, 255, 0.2);
   box-shadow:
-    0 8px 32px rgba(59, 130, 246, 0.15),
+    0 8px 32px rgba(255, 255, 255, 0.15),
     0 4px 16px rgba(0, 0, 0, 0.3),
     inset 0 1px 0 rgba(255, 255, 255, 0.3),
     inset 0 -1px 0 rgba(255, 255, 255, 0.1);
@@ -294,9 +294,9 @@ const triggerAnimations = () => {
   padding: 2px;
   background: linear-gradient(
     135deg,
-    rgba(59, 130, 246, 0.3) 0%,
-    rgba(147, 51, 234, 0.2) 50%,
-    rgba(59, 130, 246, 0.3) 100%
+    rgba(255, 255, 255, 0.3) 0%,
+    rgba(255, 255, 255, 0.2) 50%,
+    rgba(255, 255, 255, 0.3) 100%
   );
   border-radius: inherit;
   mask:

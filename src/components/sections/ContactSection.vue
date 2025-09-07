@@ -249,14 +249,14 @@ const handleSubmit = async () => {
 .contact-form {
   background: linear-gradient(
     145deg,
-    rgba(59, 130, 246, 0.08) 0%,
+    rgba(255, 255, 255, 0.08) 0%,
     rgba(15, 23, 42, 0.1) 50%,
-    rgba(147, 51, 234, 0.06) 100%
+    rgba(255, 255, 255, 0.06) 100%
   );
   backdrop-filter: blur(30px) saturate(180%);
   border: 1px solid rgba(255, 255, 255, 0.12);
   box-shadow:
-    0 20px 60px rgba(59, 130, 246, 0.2),
+    0 20px 60px rgba(0, 0, 0, 0.2),
     0 8px 16px rgba(0, 0, 0, 0.4),
     inset 0 1px 0 rgba(255, 255, 255, 0.15);
 }
@@ -271,8 +271,8 @@ const handleSubmit = async () => {
 }
 
 .glass-input:focus {
-  background: rgba(59, 130, 246, 0.1);
+  background: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(40px) saturate(200%);
-  box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
 }
 </style>

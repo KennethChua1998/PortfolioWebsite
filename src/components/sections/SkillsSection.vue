@@ -244,14 +244,14 @@ onMounted(() => {
   @apply p-6 rounded-xl relative z-10;
   background: linear-gradient(
     135deg,
-    rgba(59, 130, 246, 0.1) 0%,
-    rgba(147, 51, 234, 0.05) 50%,
+    rgba(255, 255, 255, 0.1) 0%,
+    rgba(255, 255, 255, 0.05) 50%,
     rgba(15, 23, 42, 0.1) 100%
   );
   backdrop-filter: blur(25px) saturate(200%);
   border: 1px solid rgba(255, 255, 255, 0.15);
   box-shadow:
-    0 12px 40px rgba(59, 130, 246, 0.15),
+    0 12px 40px rgba(0, 0, 0, 0.15),
     0 8px 16px rgba(0, 0, 0, 0.3),
     inset 0 1px 0 rgba(255, 255, 255, 0.2),
     inset 0 -1px 0 rgba(255, 255, 255, 0.05);
@@ -284,7 +284,7 @@ onMounted(() => {
     135deg,
     rgba(255, 255, 255, 0.1) 0%,
     transparent 50%,
-    rgba(59, 130, 246, 0.05) 100%
+    rgba(255, 255, 255, 0.05) 100%
   );
   pointer-events: none;
   border-radius: inherit;
@@ -293,14 +293,14 @@ onMounted(() => {
 .skill-category:hover {
   background: linear-gradient(
     135deg,
-    rgba(59, 130, 246, 0.15) 0%,
-    rgba(147, 51, 234, 0.1) 50%,
+    rgba(255, 255, 255, 0.15) 0%,
+    rgba(255, 255, 255, 0.1) 50%,
     rgba(15, 23, 42, 0.15) 100%
   );
   backdrop-filter: blur(35px) saturate(220%);
-  border-color: rgba(59, 130, 246, 0.3);
+  border-color: rgba(255, 255, 255, 0.3);
   box-shadow:
-    0 20px 60px rgba(59, 130, 246, 0.25),
+    0 20px 60px rgba(255, 255, 255, 0.15),
     0 12px 24px rgba(0, 0, 0, 0.4),
     inset 0 1px 0 rgba(255, 255, 255, 0.25);
   transform: translateY(-2px);
@@ -314,14 +314,14 @@ onMounted(() => {
   @apply flex items-center px-6 py-3 rounded-full border-0;
   background: linear-gradient(
     135deg,
-    rgba(59, 130, 246, 0.1) 0%,
-    rgba(147, 51, 234, 0.05) 50%,
+    rgba(255, 255, 255, 0.1) 0%,
+    rgba(255, 255, 255, 0.05) 50%,
     rgba(15, 23, 42, 0.1) 100%
   );
   backdrop-filter: blur(25px) saturate(200%);
   border: 1px solid rgba(255, 255, 255, 0.15);
   box-shadow:
-    0 12px 40px rgba(59, 130, 246, 0.15),
+    0 12px 40px rgba(0, 0, 0, 0.15),
     0 8px 16px rgba(0, 0, 0, 0.3),
     inset 0 1px 0 rgba(255, 255, 255, 0.2);
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
@@ -330,12 +330,12 @@ onMounted(() => {
 .certification-badge:hover {
   background: linear-gradient(
     135deg,
-    rgba(59, 130, 246, 0.15) 0%,
-    rgba(147, 51, 234, 0.1) 50%,
+    rgba(255, 255, 255, 0.15) 0%,
+    rgba(255, 255, 255, 0.1) 50%,
     rgba(15, 23, 42, 0.15) 100%
   );
   backdrop-filter: blur(35px) saturate(220%);
-  border-color: rgba(59, 130, 246, 0.3);
+  border-color: rgba(255, 255, 255, 0.3);
   transform: translateY(-2px);
 }
 </style>
