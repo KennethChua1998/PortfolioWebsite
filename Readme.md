@@ -9,15 +9,15 @@ Modern Vue.js website with Three.js WebGL animations and responsive design. You 
 
 ## About Kenneth
 
-Passionate Software Engineer specializing in cloud-based solutions with 4+ years of experience developing and delivering applications. Currently serving as a Cloud Specialist at PointStar, focusing on Google Cloud technologies.
+Full-Stack Developer with 4+ years of experience developing scalable web applications. Currently serving as a Cloud Specialist at PointStar, delivering Google Cloud Platform solutions across SEA.
 
-I specialize in AI/ML integration, API development, and DevOps CI/CD implementations. My technical expertise includes full-stack development with modern JavaScript frameworks, Python automation, and cloud application modernization.
+I specialize in full-stack web development, AI/ML integration, and REST API development. My technical expertise spans modern JavaScript frameworks, backend development, and cloud-native architecture.
 
 **Key Achievements:**
 
-- Technical Lead for full-stack projects in cross-functional teams
+- Technical lead for cross-functional teams delivering enterprise solutions
 - Google Cloud Professional Certified
-- Delivered Python automation solutions and no-code platforms
+- Delivered Python automation and no-code platform solutions
 
 ## Features
 
@@ -35,7 +35,7 @@ I specialize in AI/ML integration, API development, and DevOps CI/CD implementat
 | **Framework**  | [Vue.js 3](https://vuejs.org/) with Composition API                                             |
 | **Styling**    | [Tailwind CSS](https://tailwindcss.com/) for responsive design                                  |
 | **3D/WebGL**   | [Three.js](https://threejs.org/) for interactive animations                                     |
-| **Animations** | [GSAP](https://greensock.com/gsap/) for smooth transitions                                      |
+| **Animations** | CSS3 transitions and keyframes for smooth animations                                            |
 | **Icons**      | [Lucide Vue](https://lucide.dev/) for modern iconography                                        |
 | **State**      | [Pinia](https://pinia.vuejs.org/) + [VueUse](https://vueuse.org/) for reactive state management |
 | **Build Tool** | [Vite](https://vitejs.dev/) for fast development and optimized builds                           |
@@ -147,13 +147,13 @@ export const personalInfo = {
   name: 'Kenneth Chua',
   firstName: 'Kenneth',
   description: [
-    'Passionate Software Engineer specializing in cloud-based solutions with 4+ years of experience...',
-    'I specialize in AI/ML integration, API development, and DevOps CI/CD implementations...'
+    'Full-Stack Developer with 4+ years of experience developing scalable web applications...',
+    'I specialize in full-stack web development, AI/ML integration, and REST API development...'
   ],
   achievements: [
-    'Technical Lead for full-stack projects in cross-functional teams',
+    'Technical lead for cross-functional teams delivering enterprise solutions',
     'Google Cloud Professional Certified',
-    'Delivered Python automation solutions and no-code platforms'
+    'Delivered Python automation and no-code platform solutions'
   ],
   skills: ['Google Cloud Platform', 'JavaScript', 'Python', 'REST APIs', ...]
 }
@@ -165,8 +165,8 @@ export const personalInfo = {
 import { personalInfo } from './personal.js'
 export const heroData = {
   name: personalInfo.name,
-  title: 'Cloud Specialist & Full-Stack Software Engineer',
-  subtitle: 'Passionate about building scalable cloud solutions...',
+  title: 'Full Stack Developer',
+  subtitle: 'Building scalable web applications and AI-powered cloud solutions across Southeast Asia',
   buttons: { projects: 'View Projects', contact: 'Get In Touch' },
 }
 ```
