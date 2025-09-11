@@ -2,7 +2,7 @@ import { personalInfo } from './personal.js'
 
 export const footerData = {
   name: personalInfo.name,
-  title: 'Full Stack Developer',
+  title: 'Full Stack Developer & Google Cloud Specialist',
   copyright: 'All Rights Reserved',
   contactInfo: {
     email: 'me@kennethchua.com',

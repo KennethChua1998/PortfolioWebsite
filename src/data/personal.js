@@ -2,7 +2,7 @@ export const personalInfo = {
   name: 'Kenneth Chua',
   firstName: 'Kenneth',
   description: [
-    'Cloud Specialist & Software Engineer with 4+ years of experience building scalable, cloud-native applications. Currently at PointStar, designing and implementing GCP solutions with focus on CI/CD automation, AI/ML integration, and API integration.',
+    'Full Stack Developer & Google Cloud Specialist with 4+ years of experience building scalable, cloud-native applications. Currently at PointStar, designing and implementing GCP solutions with focus on CI/CD automation, AI/ML integration, and API integration.',
     'I specialize in modernizing business operations through containerization, DevOps practices, and full-stack development. My expertise spans from embedded firmware development at Motorola Solutions to enterprise cloud solutions, delivering secure and maintainable applications.',
   ],
   achievements: [
