@@ -2,9 +2,9 @@ import { personalInfo } from './personal.js'
 
 export const heroData = {
   name: personalInfo.name,
-  title: 'Full Stack Developer',
+  title: 'Full Stack Developer & Google Cloud Specialist',
   subtitle:
-    'Building scalable web applications and AI-powered cloud solutions across Southeast Asia',
+    'Building scalable, cloud-native solutions with Python, JavaScript, and GCP',
   buttons: {
     projects: 'View Projects',
     contact: 'Get In Touch',
