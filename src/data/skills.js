@@ -19,7 +19,6 @@ export const backendSkills = {
     { name: 'Flask', level: 95 },
     { name: 'REST APIs', level: 95 },
     { name: 'JWT Token', level: 70 },
-    { name: 'Microservices', level: 70 },
   ],
 }
 
@@ -32,7 +31,6 @@ export const frontendSkills = {
     { name: 'Tailwind CSS', level: 80 },
     { name: 'React', level: 75 },
     { name: 'Vue.js 3', level: 60 },
-    { name: 'Single Sign On', level: 60 },
   ],
 }
 
@@ -45,7 +43,6 @@ export const databaseSkills = {
     { name: 'Firestore', level: 85 },
     { name: 'Cloud Storage', level: 85 },
     { name: 'BigQuery', level: 70 },
-    { name: 'Looker Studio', level: 70 },
   ],
 }
 
@@ -55,7 +52,6 @@ export const toolsSkills = {
   color: 'amber',
   skills: [
     { name: 'AppSheet', level: 100 },
-    { name: 'Git', level: 95 },
     { name: 'Postman', level: 90 },
     { name: 'GitHub Actions', level: 80 },
     { name: 'Apps Script', level: 80 },

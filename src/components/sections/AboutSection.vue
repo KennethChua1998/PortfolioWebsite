@@ -2,93 +2,90 @@
   <section
     id="about"
     ref="aboutSection"
-    class="py-20 glass-section relative overflow-hidden"
+    class="py-22 bg-surface-container-low relative overflow-hidden"
   >
     <div class="section-container">
-      <div class="max-w-4xl mx-auto">
-        <h2
-          class="text-4xl font-bold text-center mb-16 text-emerald-400 about-title"
-          :class="{ 'animate-in': isVisible }"
-        >
-          About {{ personalInfo.firstName }}
-        </h2>
+      <!-- Section Label -->
+      <p
+        class="editorial-label mb-4 text-center"
+        :class="{ 'animate-in': isVisible }"
+      >
+        Professional Dossier
+      </p>
+      <h2
+        class="font-serif text-display-md font-bold text-center text-on-surface mb-16 about-title"
+        :class="{ 'animate-in': isVisible }"
+      >
+        About {{ personalInfo.firstName }}
+      </h2>
 
-        <div class="grid md:grid-cols-2 gap-12 items-center">
-          <div class="space-y-6">
-            <p
-              v-for="(desc, index) in personalInfo.description"
-              :key="index"
-              class="text-lg text-gray-200 leading-relaxed text-justify about-text"
-              :class="{ 'animate-in': animatedElements[`text${index + 1}`] }"
-            >
-              {{ desc }}
-            </p>
-
-            <div
-              class="about-glass-card p-8 rounded-xl mt-8 relative z-10 achievements-card"
-              :class="{ 'animate-in': animatedElements.achievements }"
-            >
-              <h3 class="text-xl font-semibold text-emerald-300 mb-4">
-                Key Achievements
-              </h3>
-              <ul class="space-y-2 text-gray-300">
-                <li
-                  v-for="(achievement, index) in personalInfo.achievements"
-                  :key="index"
-                  class="flex items-start gap-2 achievement-item"
-                  :class="{
-                    'animate-in': animatedElements[`achievement${index + 1}`],
-                  }"
-                >
-                  <span class="text-green-400 mt-1">•</span>
-                  {{ achievement }}
-                </li>
-              </ul>
-            </div>
-
-            <div
-              class="flex flex-wrap gap-2 skills-container"
-              :class="{ 'animate-in': animatedElements.skills }"
-            >
-              <span
-                v-for="(skill, index) in personalInfo.skills"
-                :key="skill"
-                class="px-4 py-2 skill-pill text-emerald-300 rounded-full text-sm"
-                :class="{ 'animate-in': animatedElements[`skill${index}`] }"
-                :style="{ animationDelay: `${index * 50}ms` }"
+      <div class="grid lg:grid-cols-5 gap-16 items-start">
+        <!-- Left Column: Bio Text (3 cols) -->
+        <div class="lg:col-span-3 space-y-8">
+          <!-- Professional Bio -->
+          <div>
+            <h3 class="editorial-label mb-4">Professional Bio</h3>
+            <div class="space-y-5">
+              <p
+                v-for="(desc, index) in personalInfo.description"
+                :key="index"
+                class="font-sans text-body-lg text-on-surface/80 leading-relaxed about-text"
+                :class="{ 'animate-in': animatedElements[`text${index + 1}`] }"
               >
-                {{ skill }}
-              </span>
+                {{ desc }}
+              </p>
             </div>
           </div>
 
+          <!-- Key Achievements -->
           <div
-            class="relative profile-section"
-            :class="{ 'animate-in': animatedElements.profile }"
+            class="tonal-card p-8 achievements-card"
+            :class="{ 'animate-in': animatedElements.achievements }"
           >
-            <div
-              class="w-80 h-80 mx-auto bg-gradient-to-br from-primary-600 to-accent-600 rounded-full opacity-20 blur-3xl"
-            ></div>
-            <div class="absolute inset-0 flex items-center justify-center">
-              <div
-                class="w-64 h-64 rounded-full glass-border overflow-hidden shadow-2xl"
+            <h3 class="font-serif text-headline-sm font-semibold text-on-surface mb-5">
+              Key Achievements
+            </h3>
+            <ul class="space-y-3">
+              <li
+                v-for="(achievement, index) in personalInfo.achievements"
+                :key="index"
+                class="flex items-start gap-3 achievement-item"
+                :class="{
+                  'animate-in': animatedElements[`achievement${index + 1}`],
+                }"
               >
-                <img
-                  src="/profile_pic.png"
-                  alt="Kenneth Chua Profile Picture"
-                  class="w-full h-full object-cover object-center"
-                  style="
-                    image-rendering: auto;
-                    transform: none;
-                    filter: none;
-                    will-change: auto;
-                  "
-                  width="256"
-                  height="256"
-                />
-              </div>
-            </div>
+                <span class="text-primary mt-1 font-serif">&bull;</span>
+                <span class="font-sans text-body-lg text-on-surface/80">{{ achievement }}</span>
+              </li>
+            </ul>
           </div>
+        </div>
+
+        <!-- Right Column: Technical Proficiencies (2 cols) -->
+        <div class="lg:col-span-2">
+          <h3 class="editorial-label mb-4">Technical Proficiencies</h3>
+          <div
+            class="flex flex-wrap gap-3 skills-container"
+            :class="{ 'animate-in': animatedElements.skills }"
+          >
+            <span
+              v-for="(skill, index) in personalInfo.skills"
+              :key="skill"
+              class="chip skill-chip"
+              :class="{ 'animate-in': animatedElements[`skill${index}`] }"
+              :style="{ animationDelay: `${index * 50}ms` }"
+            >
+              {{ skill }}
+            </span>
+          </div>
+
+          <!-- Pull Quote -->
+          <blockquote
+            class="pull-quote mt-10"
+            :class="{ 'animate-in': animatedElements.quote }"
+          >
+            &ldquo;The archive is not a quiet place of memory, but a vibrant engine for future innovation.&rdquo;
+          </blockquote>
         </div>
       </div>
     </div>
@@ -117,7 +114,7 @@ const setupScrollTrigger = () => {
         }
       })
     },
-    { threshold: 0.2 }
+    { threshold: 0.15 }
   )
 
   if (aboutSection.value) {
@@ -133,9 +130,8 @@ const triggerAnimations = () => {
     { key: 'achievement1', delay: 800 },
     { key: 'achievement2', delay: 900 },
     { key: 'achievement3', delay: 1000 },
-    { key: 'achievement4', delay: 1100 },
-    { key: 'skills', delay: 1300 },
-    { key: 'profile', delay: 1500 },
+    { key: 'skills', delay: 1200 },
+    { key: 'quote', delay: 1500 },
   ]
 
   animations.forEach(({ key, delay }) => {
@@ -149,58 +145,17 @@ const triggerAnimations = () => {
       () => {
         animatedElements.value[`skill${index}`] = true
       },
-      1400 + index * 50
+      1300 + index * 60
     )
   })
 }
 </script>
 
 <style scoped>
-.about-glass-card {
-  background: linear-gradient(
-    135deg,
-    rgba(255, 255, 255, 0.1) 0%,
-    rgba(255, 255, 255, 0.05) 50%,
-    rgba(15, 23, 42, 0.1) 100%
-  );
-  backdrop-filter: blur(25px) saturate(200%);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  box-shadow:
-    0 12px 40px rgba(0, 0, 0, 0.15),
-    0 8px 16px rgba(0, 0, 0, 0.3),
-    inset 0 1px 0 rgba(255, 255, 255, 0.2),
-    inset 0 -1px 0 rgba(255, 255, 255, 0.05);
-}
-
-.skill-pill {
-  background: rgba(15, 23, 42, 0.05);
-  backdrop-filter: blur(20px) saturate(180%);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow:
-    0 8px 32px rgba(0, 0, 0, 0.3),
-    inset 0 1px 0 rgba(255, 255, 255, 0.1);
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  opacity: 0;
-  transform: translateY(20px) scale(0.8);
-}
-
-.skill-pill:hover {
-  background: linear-gradient(
-    135deg,
-    rgba(255, 255, 255, 0.15) 0%,
-    rgba(255, 255, 255, 0.1) 50%,
-    rgba(15, 23, 42, 0.15) 100%
-  );
-  backdrop-filter: blur(35px) saturate(220%);
-  border-color: rgba(255, 255, 255, 0.3);
-  transform: translateY(-1px);
-}
-
-/* Animation styles */
 .about-title {
   opacity: 0;
-  transform: translateY(-30px);
-  transition: all 1s cubic-bezier(0.25, 0.8, 0.25, 1);
+  transform: translateY(-20px);
+  transition: all 0.8s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
 .about-title.animate-in {
@@ -210,8 +165,8 @@ const triggerAnimations = () => {
 
 .about-text {
   opacity: 0;
-  transform: translateX(-40px);
-  transition: all 1s cubic-bezier(0.25, 0.8, 0.25, 1);
+  transform: translateX(-30px);
+  transition: all 0.8s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
 .about-text.animate-in {
@@ -221,19 +176,19 @@ const triggerAnimations = () => {
 
 .achievements-card {
   opacity: 0;
-  transform: translateY(40px) scale(0.95);
-  transition: all 1.2s cubic-bezier(0.25, 0.8, 0.25, 1);
+  transform: translateY(30px);
+  transition: all 1s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
 .achievements-card.animate-in {
   opacity: 1;
-  transform: translateY(0) scale(1);
+  transform: translateY(0);
 }
 
 .achievement-item {
   opacity: 0;
-  transform: translateX(-20px);
-  transition: all 0.8s cubic-bezier(0.25, 0.8, 0.25, 1);
+  transform: translateX(-15px);
+  transition: all 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
 .achievement-item.animate-in {
@@ -243,8 +198,8 @@ const triggerAnimations = () => {
 
 .skills-container {
   opacity: 0;
-  transform: translateY(30px);
-  transition: all 1s cubic-bezier(0.25, 0.8, 0.25, 1);
+  transform: translateY(20px);
+  transition: all 0.8s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
 .skills-container.animate-in {
@@ -252,73 +207,25 @@ const triggerAnimations = () => {
   transform: translateY(0);
 }
 
-.skill-pill.animate-in {
-  opacity: 1;
-  transform: translateY(0) scale(1);
-  transition: all 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
-}
-
-.profile-section {
+.skill-chip {
   opacity: 0;
-  transform: translateX(40px) scale(0.9);
-  transition: all 1.2s cubic-bezier(0.25, 0.8, 0.25, 1);
+  transform: scale(0.8);
+  transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
-.profile-section.animate-in {
+.skill-chip.animate-in {
   opacity: 1;
-  transform: translateX(0) scale(1);
+  transform: scale(1);
 }
 
-/* Glass border for profile picture */
-.glass-border {
-  background: linear-gradient(
-    135deg,
-    rgba(255, 255, 255, 0.1) 0%,
-    rgba(255, 255, 255, 0.05) 50%,
-    rgba(255, 255, 255, 0.1) 100%
-  );
-  backdrop-filter: blur(20px) saturate(180%);
-  border: 2px solid rgba(255, 255, 255, 0.2);
-  box-shadow:
-    0 8px 32px rgba(255, 255, 255, 0.15),
-    0 4px 16px rgba(0, 0, 0, 0.3),
-    inset 0 1px 0 rgba(255, 255, 255, 0.3),
-    inset 0 -1px 0 rgba(255, 255, 255, 0.1);
-  position: relative;
+.pull-quote {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 1s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
-.glass-border::before {
-  content: '';
-  position: absolute;
-  inset: -2px;
-  padding: 2px;
-  background: linear-gradient(
-    135deg,
-    rgba(255, 255, 255, 0.3) 0%,
-    rgba(255, 255, 255, 0.2) 50%,
-    rgba(255, 255, 255, 0.3) 100%
-  );
-  border-radius: inherit;
-  mask:
-    linear-gradient(#fff 0 0) content-box,
-    linear-gradient(#fff 0 0);
-  mask-composite: exclude;
-}
-
-/* Subtle pulse animation for profile picture */
-.profile-section.animate-in .glass-border {
-  animation: subtlePulse 3s ease-in-out infinite;
-}
-
-@keyframes subtlePulse {
-  0%,
-  100% {
-    opacity: 0.9;
-    transform: scale(1);
-  }
-  50% {
-    opacity: 1;
-    transform: scale(1.02);
-  }
+.pull-quote.animate-in {
+  opacity: 1;
+  transform: translateY(0);
 }
 </style>

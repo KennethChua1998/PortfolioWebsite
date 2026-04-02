@@ -1,36 +1,61 @@
 <template>
   <section
     id="hero"
-    class="relative min-h-screen flex items-center justify-center overflow-hidden"
+    class="relative min-h-screen flex items-center pt-34 pb-22 bg-surface overflow-hidden"
   >
-    <!-- Three.js Canvas -->
-    <canvas ref="canvasRef" class="absolute inset-0 w-full h-full" />
+    <div class="section-container w-full">
+      <div class="grid lg:grid-cols-2 gap-16 items-center">
+        <!-- Left Column: Headline -->
+        <div>
+          <p
+            class="editorial-label mb-6 text-secondary hero-anim"
+            :class="{ 'hero-visible': isLoaded }"
+            style="transition-delay: 0.1s"
+          >
+            Google Cloud Specialist
+          </p>
+          <h1
+            class="font-serif text-display-lg md:text-[4.5rem] font-bold text-on-surface leading-tight mb-8 hero-anim"
+            :class="{ 'hero-visible': isLoaded }"
+            style="transition-delay: 0.25s"
+          >
+            {{ heroData.headline }}<br />
+            <span class="italic text-gold">{{ heroData.headlineAccent }}</span>
+          </h1>
+          <p
+            class="font-sans text-body-lg text-on-surface/70 max-w-lg mb-10 hero-anim"
+            :class="{ 'hero-visible': isLoaded }"
+            style="transition-delay: 0.45s"
+          >
+            {{ heroData.subtitle }}
+          </p>
+          <div
+            class="flex flex-wrap gap-4 hero-anim"
+            :class="{ 'hero-visible': isLoaded }"
+            style="transition-delay: 0.6s"
+          >
+            <a href="#projects" class="btn-primary" @click.prevent="smoothScroll('#projects')">
+              {{ heroData.buttons.projects }}
+            </a>
+            <a href="#contact" class="btn-secondary" @click.prevent="smoothScroll('#contact')">
+              {{ heroData.buttons.contact }}
+            </a>
+          </div>
+        </div>
 
-    <!-- Hero Content -->
-    <div class="relative z-10 section-container text-center">
-      <div class="animate-fade-in">
-        <h1 class="text-5xl md:text-7xl font-bold mb-6 gradient-text">
-          {{ heroData.name }}
-        </h1>
-        <p class="text-xl md:text-2xl text-gray-300 mb-4 max-w-2xl mx-auto">
-          {{ heroData.title }}
-        </p>
-        <p class="text-lg text-gray-400 mb-8 max-w-3xl mx-auto">
-          {{ heroData.subtitle }}
-        </p>
-        <div class="flex flex-col sm:flex-row gap-4 justify-center">
-          <a
-            href="#projects"
-            class="glass-card px-8 py-4 rounded-xl text-emerald-400 font-semibold hover:text-white transition-all duration-300"
-          >
-            {{ heroData.buttons.projects }}
-          </a>
-          <a
-            href="#contact"
-            class="glass-card px-8 py-4 rounded-xl text-gray-300 font-semibold hover:text-emerald-400 transition-all duration-300"
-          >
-            {{ heroData.buttons.contact }}
-          </a>
+        <!-- Right Column: Clean Profile Photo -->
+        <div
+          class="flex justify-center lg:justify-end hero-anim"
+          :class="{ 'hero-visible': isLoaded }"
+          style="transition-delay: 0.4s"
+        >
+          <div class="w-72 h-[22rem] md:w-80 md:h-[28rem] rounded-lg overflow-hidden shadow-tincture-lg">
+            <img
+              src="/profile_pic.png"
+              :alt="heroData.name"
+              class="w-full h-full object-cover object-top"
+            />
+          </div>
         </div>
       </div>
     </div>
@@ -38,22 +63,33 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted } from 'vue'
-import { useThreeJS } from '@/composables/useThreeJS.js'
+import { ref, onMounted } from 'vue'
 import { heroData } from '@/data/hero.js'
 
-const canvasRef = ref()
+const isLoaded = ref(false)
 
-const { initScene, animateScene, disposeScene } = useThreeJS()
-
-onMounted(async () => {
-  if (canvasRef.value) {
-    await initScene(canvasRef.value)
-    animateScene()
-  }
+onMounted(() => {
+  requestAnimationFrame(() => {
+    isLoaded.value = true
+  })
 })
 
-onUnmounted(() => {
-  disposeScene()
-})
+const smoothScroll = (selector) => {
+  const element = document.querySelector(selector)
+  element?.scrollIntoView({ behavior: 'smooth' })
+}
 </script>
+
+<style scoped>
+.hero-anim {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.8s cubic-bezier(0.25, 0.8, 0.25, 1),
+              transform 0.8s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.hero-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+</style>

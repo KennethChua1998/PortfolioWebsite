@@ -2,7 +2,7 @@ export const contactData = {
   title: 'Get In Touch',
   heading: "Let's work together",
   description:
-    "I'm always interested in new opportunities and exciting projects. Whether you need Google Cloud solutions, full-stack development, or want to discuss modern web technologies, feel free to reach out.",
+    "Open to new opportunities. Let's build something together.",
   contactInfo: {
     email: 'me@kennethchua.com',
     linkedin: 'https://www.linkedin.com/in/kenneth-chua/',

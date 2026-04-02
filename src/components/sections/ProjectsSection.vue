@@ -2,20 +2,27 @@
   <section
     id="projects"
     ref="projectsSection"
-    class="py-20 glass-section relative overflow-hidden"
+    class="py-22 bg-surface-container-low relative overflow-hidden"
   >
-    <div class="container mx-auto px-6">
-      <h2 class="text-4xl font-bold text-center mb-16 text-emerald-400">
+    <div class="section-container">
+      <!-- Section Label -->
+      <p class="editorial-label mb-4">Curated Archives</p>
+      <h2 class="font-serif text-display-md font-bold text-on-surface mb-2">
         Featured Projects
       </h2>
+      <p class="font-sans text-body-lg text-on-surface/60 max-w-2xl mb-8">
+        A curated selection of projects showcasing cloud architecture, full-stack development, and technical problem-solving.
+      </p>
 
-      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div
+        class="projects-grid gap-8"
+        :class="projects.length <= 2 ? 'md:grid-cols-2 max-w-4xl' : 'md:grid-cols-2 lg:grid-cols-3'"
+      >
         <div
           v-for="(project, index) in projects"
           :key="project.id"
           class="project-wrapper"
           :class="{ 'animate-in': animatedProjects[index] }"
-          :style="{ animationDelay: `${index * 200}ms` }"
         >
           <ProjectCard :project="project" />
         </div>
@@ -33,16 +40,14 @@ const projectsSection = ref(null)
 const animatedProjects = ref({})
 const isVisible = ref(false)
 
-// Animate projects on scroll
 const animateProjects = () => {
   projects.forEach((project, index) => {
     setTimeout(() => {
       animatedProjects.value[index] = true
-    }, index * 200) // Stagger by 200ms - slightly longer
+    }, index * 150)
   })
 }
 
-// Intersection Observer for scroll trigger
 const setupScrollTrigger = () => {
   const observer = new IntersectionObserver(
     entries => {
@@ -53,7 +58,7 @@ const setupScrollTrigger = () => {
         }
       })
     },
-    { threshold: 0.2 }
+    { threshold: 0.15 }
   )
 
   if (projectsSection.value) {
@@ -67,34 +72,22 @@ onMounted(() => {
 </script>
 
 <style scoped>
+.projects-grid {
+  display: grid;
+}
+
 .project-wrapper {
+  display: grid;
+  grid-row: span 7;
+  grid-template-rows: subgrid;
   opacity: 0;
-  transform: translateY(50px) scale(0.9);
-  transition: all 1.2s cubic-bezier(0.25, 0.8, 0.25, 1);
+  transform: translateY(20px);
+  transition: opacity 0.6s cubic-bezier(0.25, 0.8, 0.25, 1),
+              transform 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
 .project-wrapper.animate-in {
   opacity: 1;
-  transform: translateY(0) scale(1);
-}
-
-/* Enhanced hover effects */
-.project-wrapper.animate-in:hover {
-  transform: translateY(-10px) scale(1.03);
-  transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
-}
-
-/* 3D entrance effects */
-.project-wrapper:nth-child(even) {
-  transform: translateY(50px) scale(0.9) rotateX(15deg);
-}
-
-.project-wrapper:nth-child(odd) {
-  transform: translateY(50px) scale(0.9) rotateX(-15deg);
-}
-
-.project-wrapper.animate-in:nth-child(even),
-.project-wrapper.animate-in:nth-child(odd) {
-  transform: translateY(0) scale(1) rotateX(0deg);
+  transform: translateY(0);
 }
 </style>

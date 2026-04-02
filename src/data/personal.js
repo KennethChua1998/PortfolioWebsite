@@ -1,14 +1,16 @@
+const startYear = 2021
+const yearsOfExperience = new Date().getFullYear() - startYear
+
 export const personalInfo = {
   name: 'Kenneth Chua',
   firstName: 'Kenneth',
   description: [
-    'Google Cloud Specialist & Full Stack Developer with 4+ years of experience building scalable, cloud-native applications. Currently at PointStar, designing and implementing full stack solutions on GCP with focus on CI/CD automation, AI/ML integration, and API integration.',
-    'Passionate about delivering enterprise-grade solutions through modern development practices, collaborating with cross-functional teams to create secure, performant applications that drive business value.',
+    `Currently at PointStar, designing and implementing full stack solutions on Google Cloud Platform with ${yearsOfExperience} years of hands-on experience. Focused on CI/CD automation, AI/ML integration, and building scalable API-driven applications.`,
   ],
   achievements: [
     'Google Cloud Professional Developer Certified',
     'Technical Expert Badge - Build with Vertex AI',
-    'Delivered enterprise solutions delivery across cross-functional teams',
+    'Delivered enterprise solutions across cross-functional teams',
   ],
   skills: [
     'Google Cloud Platform (GCP)',

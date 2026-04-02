@@ -1,120 +1,119 @@
 <template>
-  <div
-    class="group project-card rounded-xl overflow-hidden relative z-10 flex flex-col h-full"
-  >
-    <!-- Project Image -->
-    <div class="relative h-48 overflow-hidden flex-shrink-0 rounded-t-xl">
+  <div class="group tonal-card overflow-hidden card-grid h-full">
+    <!-- Row 1: Project Image -->
+    <div class="relative h-52 overflow-hidden">
       <img
         v-if="project.imageUrl"
         :src="project.imageUrl"
         :alt="project.title"
-        class="absolute inset-0 w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+        class="project-img absolute inset-0 w-full h-full object-cover transition-all duration-500 group-hover:scale-105"
         @error="handleImageError"
       />
+      <div v-if="project.imageUrl" class="project-img-overlay absolute inset-0 pointer-events-none transition-opacity duration-500"></div>
       <div
-        v-else
-        class="w-full h-full flex items-center justify-center bg-gradient-to-br from-gray-800/50 to-gray-900/50"
+        v-else-if="project.confidential"
+        class="w-full h-full flex items-center justify-center bg-neutral-800/60"
       >
         <div class="flex flex-col items-center space-y-3">
-          <div class="p-4 rounded-full bg-gray-700/50 backdrop-blur-sm">
-            <Code :size="32" class="text-gray-400" />
+          <div class="p-4 rounded bg-neutral-700/50">
+            <ShieldAlert :size="32" class="text-neutral-400" />
           </div>
-          <p class="text-gray-400 text-sm font-medium">Project Preview</p>
+          <p class="font-sans text-body-md text-neutral-400 uppercase tracking-widest">Confidential</p>
         </div>
       </div>
-
-      <!-- Subtle overlay only on hover -->
       <div
-        class="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300"
-      ></div>
-
-      <!-- Tags appear only on hover -->
-      <div
-        class="absolute top-3 left-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+        v-else
+        class="w-full h-full flex items-center justify-center bg-surface-container-high"
       >
-        <div class="flex flex-wrap gap-2 items-center">
-          <span
-            v-if="project.status"
-            class="bg-black/80 backdrop-blur-sm text-white text-xs px-2 py-1 rounded-full border border-white/20"
-          >
-            {{ project.status }}
-          </span>
-          <span
-            v-if="project.year"
-            class="bg-black/80 backdrop-blur-sm text-white text-xs px-2 py-1 rounded-full border border-white/20"
-          >
-            {{ project.year }}
-          </span>
-          <span
-            v-if="project.aiAssisted"
-            class="bg-black/80 backdrop-blur-sm text-white text-xs px-2 py-1 rounded-full border border-white/20"
-          >
-            AI-Assisted
-          </span>
+        <div class="flex flex-col items-center space-y-3">
+          <div class="p-4 rounded bg-surface-container">
+            <Code :size="32" class="text-on-surface/30" />
+          </div>
+          <p class="font-sans text-body-md text-on-surface/40">Project Preview</p>
         </div>
       </div>
     </div>
 
-    <!-- Project Content -->
-    <div class="p-6 flex flex-col flex-grow">
-      <h3 class="text-xl font-semibold text-white mb-3">
-        {{ project.title }}
-      </h3>
+    <!-- Row 2: Title -->
+    <h3 class="px-6 pt-5 font-serif text-title-lg font-semibold text-on-surface self-start">
+      {{ project.title }}
+    </h3>
 
-      <p
-        class="text-gray-300 mb-4 text-sm leading-relaxed flex-grow text-justify"
+    <!-- Row 3: Description -->
+    <p class="px-6 pt-2 font-sans text-body-md text-on-surface/70 leading-relaxed self-start">
+      {{ project.description }}
+    </p>
+
+    <!-- Row 4: Spacer (1fr — absorbs remaining space) -->
+    <div class="spacer"></div>
+
+    <!-- Row 5: Meta (year, status) -->
+    <div class="px-6 pt-3 flex items-center flex-wrap gap-x-2 gap-y-1 font-sans text-label-md text-on-surface/50 uppercase tracking-widest self-end">
+      <span v-if="project.year">{{ project.year }}</span>
+      <span v-if="project.year && project.status" class="text-on-surface/30">&middot;</span>
+      <span v-if="project.status">{{ project.status }}</span>
+      <span v-if="project.aiAssisted && (project.year || project.status)" class="text-on-surface/30">&middot;</span>
+      <span v-if="project.aiAssisted" class="text-primary/70">{{ project.aiLabel || 'AI-Assisted' }}</span>
+    </div>
+
+    <!-- Row 6: Chips -->
+    <div class="px-6 pt-2 flex flex-wrap gap-2 content-start self-start">
+      <span
+        v-for="tech in project.technologies"
+        :key="tech"
+        class="chip text-xs"
       >
-        {{ project.description }}
-      </p>
+        {{ tech }}
+      </span>
+    </div>
 
-      <!-- Technologies -->
-      <div class="flex flex-wrap gap-2 mb-4">
-        <span
-          v-for="tech in project.technologies"
-          :key="tech"
-          class="px-3 py-1 skill-pill text-emerald-300 text-xs rounded-full"
-        >
-          {{ tech }}
-        </span>
-      </div>
+    <!-- Row 7: Links -->
+    <div class="px-6 pb-5 pt-3 flex gap-4 self-end border-t border-outline-variant/15 mx-6">
+      <a
+        v-if="project.githubUrl"
+        :href="project.githubUrl"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="btn-tertiary text-xs"
+      >
+        <Github :size="14" class="inline mr-1" />
+        View Code
+      </a>
 
-      <!-- Links -->
-      <div class="flex gap-3 mt-auto">
-        <a
-          v-if="project.githubUrl"
-          :href="project.githubUrl"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="flex items-center gap-2 text-gray-400 hover:text-emerald-400 transition-colors duration-200"
-        >
-          <Github :size="16" />
-          <span class="text-sm">Code</span>
-        </a>
+      <a
+        v-if="project.liveUrl"
+        :href="project.liveUrl"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="btn-tertiary text-xs"
+      >
+        <ExternalLink :size="14" class="inline mr-1" />
+        Live Demo
+      </a>
 
-        <a
-          v-if="project.liveUrl"
-          :href="project.liveUrl"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="flex items-center gap-2 text-gray-400 hover:text-emerald-400 transition-colors duration-200"
-        >
-          <ExternalLink :size="16" />
-          <span class="text-sm">Live Demo</span>
-        </a>
+      <a
+        v-if="project.slidesUrl"
+        :href="project.slidesUrl"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="btn-tertiary text-xs"
+      >
+        <Presentation :size="14" class="inline mr-1" />
+        Slides
+      </a>
 
-        <span
-          v-if="!project.githubUrl && !project.liveUrl"
-          class="text-gray-500 text-sm italic"
-        >
-          Confidential Project
-        </span>
-      </div>
+      <span
+        v-if="!project.githubUrl && !project.liveUrl && !project.slidesUrl"
+        class="font-sans text-body-md text-on-surface/40 italic"
+      >
+        Confidential Project
+      </span>
     </div>
   </div>
 </template>
 
 <script setup>
-import { Code, Github, ExternalLink } from 'lucide-vue-next'
+import { Code, Github, ExternalLink, Presentation, ShieldAlert } from 'lucide-vue-next'
 
 defineProps({
   project: {
@@ -124,106 +123,38 @@ defineProps({
 })
 
 const handleImageError = event => {
-  console.warn('Failed to load project image:', event.target.src)
-  // Hide the image element on error
   event.target.style.display = 'none'
 }
 </script>
 
 <style scoped>
-.project-card {
+/* Grid layout: each card row aligns via subgrid in parent */
+.card-grid {
+  display: grid;
+  grid-row: span 7;
+  grid-template-rows: subgrid;
+}
+.spacer {
+  /* 1fr row absorbs remaining space — keeps description tight to title */
+}
+
+/* Warm desaturated filter for consistent image tone */
+.project-img {
+  filter: saturate(0.6) brightness(0.9) sepia(0.15);
+}
+.project-img-overlay {
   background: linear-gradient(
-    135deg,
-    rgba(255, 255, 255, 0.1) 0%,
-    rgba(255, 255, 255, 0.05) 50%,
-    rgba(15, 23, 42, 0.1) 100%
+    to bottom,
+    rgba(40, 35, 25, 0.12) 0%,
+    rgba(40, 35, 25, 0.25) 100%
   );
-  backdrop-filter: blur(25px) saturate(200%);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  box-shadow:
-    0 12px 40px rgba(0, 0, 0, 0.15),
-    0 8px 16px rgba(0, 0, 0, 0.3),
-    inset 0 1px 0 rgba(255, 255, 255, 0.2),
-    inset 0 -1px 0 rgba(255, 255, 255, 0.05);
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  opacity: 1;
 }
-
-.project-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 1px;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(255, 255, 255, 0.4),
-    transparent
-  );
+/* Lift filter on hover to reveal original */
+.group:hover .project-img {
+  filter: saturate(1) brightness(1) sepia(0);
 }
-
-.project-card::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(
-    135deg,
-    rgba(255, 255, 255, 0.1) 0%,
-    transparent 50%,
-    rgba(255, 255, 255, 0.05) 100%
-  );
-  pointer-events: none;
-  border-radius: inherit;
-}
-
-.project-card:hover {
-  background: linear-gradient(
-    135deg,
-    rgba(255, 255, 255, 0.15) 0%,
-    rgba(255, 255, 255, 0.1) 50%,
-    rgba(15, 23, 42, 0.15) 100%
-  );
-  backdrop-filter: blur(35px) saturate(220%);
-  border-color: rgba(255, 255, 255, 0.3);
-  box-shadow:
-    0 20px 60px rgba(255, 255, 255, 0.15),
-    0 12px 24px rgba(0, 0, 0, 0.4),
-    inset 0 1px 0 rgba(255, 255, 255, 0.25);
-  transform: translateY(-2px);
-}
-
-.glass {
-  background: rgba(15, 23, 42, 0.05);
-  backdrop-filter: blur(20px) saturate(180%);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow:
-    0 8px 32px rgba(0, 0, 0, 0.3),
-    inset 0 1px 0 rgba(255, 255, 255, 0.1);
-}
-
-.skill-pill {
-  background: rgba(15, 23, 42, 0.05);
-  backdrop-filter: blur(20px) saturate(180%);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow:
-    0 8px 32px rgba(0, 0, 0, 0.3),
-    inset 0 1px 0 rgba(255, 255, 255, 0.1);
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.skill-pill:hover {
-  background: linear-gradient(
-    135deg,
-    rgba(255, 255, 255, 0.15) 0%,
-    rgba(255, 255, 255, 0.1) 50%,
-    rgba(15, 23, 42, 0.15) 100%
-  );
-  backdrop-filter: blur(35px) saturate(220%);
-  border-color: rgba(255, 255, 255, 0.3);
-  transform: translateY(-1px);
+.group:hover .project-img-overlay {
+  opacity: 0;
 }
 </style>

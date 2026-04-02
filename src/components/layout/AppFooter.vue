@@ -1,47 +1,50 @@
 <template>
-  <footer class="bg-gray-900 border-t border-gray-800 py-12">
+  <footer class="bg-surface-container-high py-12">
     <div class="section-container">
       <div class="flex flex-col md:flex-row justify-between items-center">
         <div class="mb-4 md:mb-0">
-          <div class="text-2xl font-bold text-emerald-400 mb-2">
-            {{ footerData.name }}
+          <div class="font-serif text-title-lg font-semibold text-on-surface mb-1">
+            Bibliotheca Archive
           </div>
-          <p class="text-gray-400 text-sm">
-            {{ footerData.title }}
+          <p class="font-sans text-body-md text-on-surface/50">
+            Curated by {{ footerData.name }} &mdash; {{ footerData.title }}
           </p>
         </div>
 
-        <div class="flex space-x-6">
+        <div class="flex items-center space-x-6">
           <a
             :href="footerData.contactInfo.github"
             target="_blank"
             rel="noopener noreferrer"
-            class="text-gray-400 hover:text-emerald-400 transition-colors"
+            aria-label="GitHub profile"
+            class="text-on-surface/40 hover:text-primary transition-colors"
           >
-            <Github :size="20" />
+            <Github :size="18" />
           </a>
 
           <a
             :href="footerData.contactInfo.linkedin"
             target="_blank"
             rel="noopener noreferrer"
-            class="text-gray-400 hover:text-emerald-400 transition-colors"
+            aria-label="LinkedIn profile"
+            class="text-on-surface/40 hover:text-primary transition-colors"
           >
-            <Linkedin :size="20" />
+            <Linkedin :size="18" />
           </a>
 
           <a
             :href="`mailto:${footerData.contactInfo.email}`"
-            class="text-gray-400 hover:text-emerald-400 transition-colors"
+            aria-label="Send email"
+            class="text-on-surface/40 hover:text-primary transition-colors"
           >
-            <Mail :size="20" />
+            <Mail :size="18" />
           </a>
         </div>
       </div>
 
-      <div class="mt-8 pt-8 border-t border-gray-800 text-center">
-        <p class="text-gray-500 text-sm">
-          © {{ currentYear }} {{ footerData.name }}.
+      <div class="mt-8 pt-8 text-center" style="border-top: 1px solid rgba(194, 201, 187, 0.2);">
+        <p class="font-sans text-body-md text-on-surface/40">
+          &copy; {{ currentYear }} {{ footerData.name }}.
           {{ footerData.copyright }}.
         </p>
       </div>
