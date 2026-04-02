@@ -104,7 +104,7 @@ describe('ProjectCard', () => {
       props: { project: mockProject },
     })
 
-    const techPills = wrapper.findAll('.skill-pill')
+    const techPills = wrapper.findAll('.chip')
     expect(techPills).toHaveLength(3)
     expect(techPills[0].text()).toBe('Vue.js')
     expect(techPills[1].text()).toBe('JavaScript')

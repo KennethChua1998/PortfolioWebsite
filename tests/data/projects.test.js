@@ -64,7 +64,7 @@ describe('Projects Data', () => {
   })
 
   it('contains expected portfolio project', () => {
-    const portfolioProject = projects.find(p => p.title === 'Interactive Portfolio Website')
+    const portfolioProject = projects.find(p => p.title === 'Portfolio Website')
     expect(portfolioProject).toBeDefined()
     expect(portfolioProject.technologies).toContain('Vue.js 3')
     expect(portfolioProject.technologies).toContain('Three.js')

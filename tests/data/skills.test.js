@@ -98,7 +98,7 @@ describe('Skills Data', () => {
       expect(toolsSkills.title).toBe('Tools')
       expect(toolsSkills.icon).toBe('Settings')
       expect(toolsSkills.color).toBe('amber')
-      expect(toolsSkills.skills.some(skill => skill.name === 'Git')).toBe(true)
+      expect(toolsSkills.skills.some(skill => skill.name === 'GitHub Actions')).toBe(true)
     })
   })
 
