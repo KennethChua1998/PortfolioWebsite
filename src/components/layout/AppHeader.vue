@@ -32,8 +32,8 @@
         <!-- Mobile Menu Button -->
         <button
           class="md:hidden p-2 text-on-surface/70 hover:text-primary transition-colors duration-300"
-          @click="toggleMobileMenu"
           :aria-label="isMobileMenuOpen ? 'Close menu' : 'Open menu'"
+          @click="toggleMobileMenu"
         >
           <component :is="isMobileMenuOpen ? X : MenuIcon" :size="24" />
         </button>
