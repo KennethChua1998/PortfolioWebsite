@@ -1,7 +1,4 @@
-import { personalInfo } from './personal.js'
-
-const startYear = 2021
-const yearsOfExperience = new Date().getFullYear() - startYear
+import { personalInfo, yearsOfExperience } from './personal.js'
 
 export const heroData = {
   name: personalInfo.name,

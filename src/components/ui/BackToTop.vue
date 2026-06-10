@@ -24,18 +24,12 @@
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue'
 import { ChevronUp } from 'lucide-vue-next'
+import { scrollToTop } from '@/utils/scroll.js'
 
 const showBackToTop = ref(false)
 
 const handleScroll = () => {
   showBackToTop.value = window.scrollY > 600
-}
-
-const scrollToTop = () => {
-  window.scrollTo({
-    top: 0,
-    behavior: 'smooth',
-  })
 }
 
 onMounted(() => {

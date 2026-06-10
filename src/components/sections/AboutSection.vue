@@ -93,34 +93,14 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref } from 'vue'
 import { personalInfo } from '@/data/personal.js'
+import { useScrollTrigger } from '@/composables/useScrollTrigger.js'
 
 const aboutSection = ref(null)
-const isVisible = ref(false)
 const animatedElements = ref({})
 
-onMounted(() => {
-  setupScrollTrigger()
-})
-
-const setupScrollTrigger = () => {
-  const observer = new IntersectionObserver(
-    entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting && !isVisible.value) {
-          isVisible.value = true
-          triggerAnimations()
-        }
-      })
-    },
-    { threshold: 0.15 }
-  )
-
-  if (aboutSection.value) {
-    observer.observe(aboutSection.value)
-  }
-}
+const { isVisible } = useScrollTrigger(aboutSection, () => triggerAnimations())
 
 const triggerAnimations = () => {
   const animations = [

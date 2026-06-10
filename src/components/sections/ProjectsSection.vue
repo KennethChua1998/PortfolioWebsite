@@ -32,13 +32,13 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref } from 'vue'
 import ProjectCard from '@/components/ui/ProjectCard.vue'
 import { projects } from '@/data/projects.js'
+import { useScrollTrigger } from '@/composables/useScrollTrigger.js'
 
 const projectsSection = ref(null)
 const animatedProjects = ref({})
-const isVisible = ref(false)
 
 const animateProjects = () => {
   projects.forEach((project, index) => {
@@ -48,27 +48,7 @@ const animateProjects = () => {
   })
 }
 
-const setupScrollTrigger = () => {
-  const observer = new IntersectionObserver(
-    entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting && !isVisible.value) {
-          isVisible.value = true
-          setTimeout(() => animateProjects(), 200)
-        }
-      })
-    },
-    { threshold: 0.15 }
-  )
-
-  if (projectsSection.value) {
-    observer.observe(projectsSection.value)
-  }
-}
-
-onMounted(() => {
-  setupScrollTrigger()
-})
+useScrollTrigger(projectsSection, () => setTimeout(() => animateProjects(), 200))
 </script>
 
 <style scoped>

@@ -1,5 +1,5 @@
 const startYear = 2021
-const yearsOfExperience = new Date().getFullYear() - startYear
+export const yearsOfExperience = new Date().getFullYear() - startYear
 
 export const personalInfo = {
   name: 'Kenneth Chua',

@@ -6,7 +6,7 @@
         <a
           href="#hero"
           class="font-serif text-lg font-semibold text-on-surface hover:text-primary transition-colors duration-300"
-          @click="scrollToTop"
+          @click.prevent="scrollToTop()"
         >
           Bibliotheca Archive
         </a>
@@ -18,7 +18,7 @@
               :href="item.href"
               class="px-4 py-2 font-sans text-body-md transition-colors duration-300"
               :class="activeSection === item.href ? 'text-primary font-medium' : 'text-on-surface/70 hover:text-primary'"
-              @click="smoothScroll"
+              @click.prevent="smoothScroll(item.href)"
             >
               {{ item.label }}
             </a>
@@ -63,6 +63,7 @@
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue'
 import { Menu as MenuIcon, X } from 'lucide-vue-next'
+import { smoothScroll, scrollToTop } from '@/utils/scroll.js'
 
 const isMobileMenuOpen = ref(false)
 const activeSection = ref('')
@@ -112,17 +113,6 @@ const closeMobileMenu = () => {
   isMobileMenuOpen.value = false
 }
 
-const scrollToTop = event => {
-  event.preventDefault()
-  window.scrollTo({ top: 0, behavior: 'smooth' })
-}
-
-const smoothScroll = event => {
-  event.preventDefault()
-  const target = event.target
-  const element = document.querySelector(target.getAttribute('href'))
-  element?.scrollIntoView({ behavior: 'smooth' })
-}
 </script>
 
 <style scoped>

@@ -75,7 +75,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref } from 'vue'
 import {
   Cloud,
   Code,
@@ -92,10 +92,10 @@ import {
   toolsSkills,
   certifications,
 } from '@/data/skills.js'
+import { useScrollTrigger } from '@/composables/useScrollTrigger.js'
 
 const skillsSection = ref(null)
 const animatedSkills = ref({})
-const isVisible = ref(false)
 
 const iconComponents = {
   Cloud,
@@ -162,27 +162,11 @@ const animateSkills = () => {
   })
 }
 
-const setupScrollTrigger = () => {
-  const observer = new IntersectionObserver(
-    entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting && !isVisible.value) {
-          isVisible.value = true
-          setTimeout(() => animateSkills(), 200)
-        }
-      })
-    },
-    { threshold: 0.2 }
-  )
-
-  if (skillsSection.value) {
-    observer.observe(skillsSection.value)
-  }
-}
-
-onMounted(() => {
-  setupScrollTrigger()
-})
+useScrollTrigger(
+  skillsSection,
+  () => setTimeout(() => animateSkills(), 200),
+  { threshold: 0.2 }
+)
 </script>
 
 <style scoped>
