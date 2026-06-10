@@ -49,11 +49,11 @@
           :class="{ 'hero-visible': isLoaded }"
           style="transition-delay: 0.4s"
         >
-          <div class="w-72 h-[22rem] md:w-80 md:h-[28rem] rounded-lg overflow-hidden shadow-tincture-lg">
+          <div class="w-72 md:w-96 aspect-[7/6] rounded-lg overflow-hidden shadow-tincture-lg">
             <img
               src="/profile_pic.png"
               :alt="heroData.name"
-              class="w-full h-full object-cover object-top"
+              class="profile-img w-full h-full object-cover"
             />
           </div>
         </div>
@@ -65,6 +65,7 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import { heroData } from '@/data/hero.js'
+import { smoothScroll } from '@/utils/scroll.js'
 
 const isLoaded = ref(false)
 
@@ -73,11 +74,6 @@ onMounted(() => {
     isLoaded.value = true
   })
 })
-
-const smoothScroll = (selector) => {
-  const element = document.querySelector(selector)
-  element?.scrollIntoView({ behavior: 'smooth' })
-}
 </script>
 
 <style scoped>
@@ -91,5 +87,10 @@ const smoothScroll = (selector) => {
 .hero-visible {
   opacity: 1;
   transform: translateY(0);
+}
+
+/* Warm editorial tone, slightly lifted contrast — consistent with project cards */
+.profile-img {
+  filter: contrast(0.92) brightness(1.04) saturate(0.85) sepia(0.08);
 }
 </style>
