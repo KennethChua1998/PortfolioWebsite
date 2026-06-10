@@ -131,7 +131,7 @@
   /* Editorial pull-quote */
   .pull-quote {
     @apply font-serif italic text-headline-sm;
-    border-left: 4px solid #745b18;
+    border-left: 4px solid #daa520;
     padding-left: 1.5rem;
     color: #1b1c1a;
   }
@@ -193,7 +193,7 @@
 
   /* Gold accent text */
   .text-gold {
-    color: #745b18;
+    color: #daa520;
   }
 
   /* Ink text - never pure black */

@@ -13,7 +13,7 @@ export default {
           light: '#1a5415',
         },
         secondary: {
-          DEFAULT: '#745b18',
+          DEFAULT: '#daa520',
           container: '#ffdc8c',
           light: '#795f1c',
         },
