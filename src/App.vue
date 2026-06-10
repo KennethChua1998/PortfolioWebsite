@@ -11,6 +11,7 @@
     </main>
     <AppFooter />
     <BackToTop />
+    <CustomCursor />
   </div>
 </template>
 
@@ -23,4 +24,5 @@ import SkillsSection from '@/components/sections/SkillsSection.vue'
 import ProjectsSection from '@/components/sections/ProjectsSection.vue'
 import ContactSection from '@/components/sections/ContactSection.vue'
 import BackToTop from '@/components/ui/BackToTop.vue'
+import CustomCursor from '@/components/ui/CustomCursor.vue'
 </script>

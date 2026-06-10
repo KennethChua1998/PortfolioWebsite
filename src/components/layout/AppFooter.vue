@@ -42,11 +42,12 @@
         </div>
       </div>
 
-      <div class="mt-8 pt-8 text-center" style="border-top: 1px solid rgba(194, 201, 187, 0.2);">
+      <div class="mt-8 pt-8 text-center space-y-2" style="border-top: 1px solid rgba(194, 201, 187, 0.2);">
         <p class="font-sans text-body-md text-on-surface/40">
           &copy; {{ currentYear }} {{ footerData.name }}.
           {{ footerData.copyright }}.
         </p>
+        <VisitCounter />
       </div>
     </div>
   </footer>
@@ -56,6 +57,7 @@
 import { computed } from 'vue'
 import { Github, Linkedin, Mail } from 'lucide-vue-next'
 import { footerData } from '@/data/footer.js'
+import VisitCounter from '@/components/ui/VisitCounter.vue'
 
 const currentYear = computed(() => new Date().getFullYear())
 </script>

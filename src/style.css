@@ -13,6 +13,19 @@
     scroll-behavior: smooth;
   }
 
+  /* Hide native cursor when the custom cursor is active (mouse devices only);
+     keep the native I-beam in text fields for usability */
+  @media (pointer: fine) {
+    html.has-custom-cursor,
+    html.has-custom-cursor a,
+    html.has-custom-cursor button,
+    html.has-custom-cursor [role='button'],
+    html.has-custom-cursor label,
+    html.has-custom-cursor select {
+      cursor: none;
+    }
+  }
+
   body {
     @apply font-sans antialiased bg-surface text-on-surface;
     -webkit-font-smoothing: antialiased;
