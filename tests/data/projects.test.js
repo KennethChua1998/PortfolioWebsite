@@ -67,7 +67,15 @@ describe('Projects Data', () => {
     const portfolioProject = projects.find(p => p.title === 'Portfolio Website')
     expect(portfolioProject).toBeDefined()
     expect(portfolioProject.technologies).toContain('Vue.js 3')
-    expect(portfolioProject.technologies).toContain('Three.js')
+    expect(portfolioProject.technologies).toContain('Tailwind CSS')
     expect(portfolioProject.year).toBe('2025')
+  })
+
+  it('does not leak Google account ids in share links', () => {
+    projects.forEach(project => {
+      if (project.slidesUrl) {
+        expect(project.slidesUrl).not.toContain('ouid=')
+      }
+    })
   })
 })

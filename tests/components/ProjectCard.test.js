@@ -1,4 +1,4 @@
-import { describe, it, expect, vi } from 'vitest'
+import { describe, it, expect } from 'vitest'
 import { mount } from '@vue/test-utils'
 import ProjectCard from '../../src/components/ui/ProjectCard.vue'
 
@@ -81,22 +81,26 @@ describe('ProjectCard', () => {
     expect(wrapper.text()).toContain('Confidential Project')
   })
 
-  it('handles image error correctly', async () => {
-    const consoleSpy = vi.spyOn(console, 'warn').mockImplementation(() => {})
+  it('shows the fallback placeholder when the image fails to load', async () => {
     const wrapper = mount(ProjectCard, {
       props: { project: mockProject },
     })
 
-    const img = wrapper.find('img')
-    
-    // Simulate the error event by calling the handleImageError method directly
-    await img.trigger('error')
-    
-    // The actual implementation would be tested by triggering a real error
-    // For now, we'll test that the component renders correctly
-    expect(img.exists()).toBe(true)
-    
-    consoleSpy.mockRestore()
+    await wrapper.find('img').trigger('error')
+
+    expect(wrapper.find('img').exists()).toBe(false)
+    expect(wrapper.find('.project-img-overlay').exists()).toBe(false)
+    expect(wrapper.text()).toContain('Project Preview')
+  })
+
+  it('shows the confidential placeholder on image error for confidential projects', async () => {
+    const wrapper = mount(ProjectCard, {
+      props: { project: { ...mockProject, confidential: true } },
+    })
+
+    await wrapper.find('img').trigger('error')
+
+    expect(wrapper.text()).toContain('Confidential')
   })
 
   it('renders technology pills correctly', () => {

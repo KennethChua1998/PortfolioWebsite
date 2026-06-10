@@ -3,13 +3,13 @@
     <!-- Row 1: Project Image -->
     <div class="relative h-52 overflow-hidden">
       <img
-        v-if="project.imageUrl"
+        v-if="project.imageUrl && !imageFailed"
         :src="project.imageUrl"
         :alt="project.title"
         class="project-img absolute inset-0 w-full h-full object-cover transition-all duration-500 group-hover:scale-105"
-        @error="handleImageError"
+        @error="imageFailed = true"
       />
-      <div v-if="project.imageUrl" class="project-img-overlay absolute inset-0 pointer-events-none transition-opacity duration-500"></div>
+      <div v-if="project.imageUrl && !imageFailed" class="project-img-overlay absolute inset-0 pointer-events-none transition-opacity duration-500"></div>
       <div
         v-else-if="project.confidential"
         class="w-full h-full flex items-center justify-center bg-neutral-800/60"
@@ -113,6 +113,7 @@
 </template>
 
 <script setup>
+import { ref } from 'vue'
 import { Code, Github, ExternalLink, Presentation, ShieldAlert } from 'lucide-vue-next'
 
 defineProps({
@@ -122,9 +123,7 @@ defineProps({
   },
 })
 
-const handleImageError = event => {
-  event.target.style.display = 'none'
-}
+const imageFailed = ref(false)
 </script>
 
 <style scoped>
