@@ -27,10 +27,10 @@ export const frontendSkills = {
   icon: 'Monitor',
   color: 'purple',
   skills: [
-    { name: 'HTML5', level: 100 },
+    { name: 'HTML5', level: 95 },
     { name: 'Tailwind CSS', level: 80 },
     { name: 'React', level: 75 },
-    { name: 'Vue.js 3', level: 60 },
+    { name: 'Vue.js 3', level: 85 },
   ],
 }
 
@@ -51,7 +51,7 @@ export const toolsSkills = {
   icon: 'Settings',
   color: 'amber',
   skills: [
-    { name: 'AppSheet', level: 100 },
+    { name: 'AppSheet', level: 95 },
     { name: 'Postman', level: 90 },
     { name: 'GitHub Actions', level: 80 },
     { name: 'Apps Script', level: 80 },
@@ -61,12 +61,12 @@ export const toolsSkills = {
 export const certifications = [
   {
     name: 'Google Cloud Professional Cloud Architect',
-    period: '(2021-2025)',
+    period: '(2021-2027)',
     icon: 'Award',
   },
   {
     name: 'Google Cloud Professional Cloud Developer',
-    period: '(2023-2025)',
+    period: '(2023-2027)',
     icon: 'Award',
   },
   {
