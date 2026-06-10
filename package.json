@@ -1,7 +1,7 @@
 {
   "name": "kenneth-chua-portfolio",
   "version": "1.0.0",
-  "description": "A modern, interactive Vue.js portfolio website featuring stunning WebGL animations and responsive design",
+  "description": "A modern Vue.js portfolio website with an editorial design system and responsive layout",
   "private": true,
   "type": "module",
   "scripts": {
@@ -15,20 +15,11 @@
     "format": "prettier --write src/"
   },
   "dependencies": {
-    "@types/three": "^0.179.0",
-    "@vueuse/core": "^10.9.0",
-    "gsap": "^3.12.5",
     "lucide-vue-next": "^0.365.0",
-    "pinia": "^2.1.7",
-    "three": "^0.162.0",
-    "vanta": "^0.5.24",
-    "vue": "^3.4.21",
-    "vue-router": "^4.3.0"
+    "vue": "^3.4.21"
   },
   "devDependencies": {
     "@tailwindcss/typography": "^0.5.12",
-    "@typescript-eslint/eslint-plugin": "^8.42.0",
-    "@typescript-eslint/parser": "^8.42.0",
     "@vitejs/plugin-vue": "^6.0.1",
     "@vue/test-utils": "^2.4.5",
     "autoprefixer": "^10.4.19",

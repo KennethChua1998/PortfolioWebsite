@@ -21,13 +21,9 @@ export default defineConfig({
     rollupOptions: {
       output: {
         manualChunks: {
-          three: ['three'],
-          vue: ['vue', 'vue-router', 'pinia'],
+          vue: ['vue'],
         },
       },
     },
-  },
-  optimizeDeps: {
-    include: ['three', '@vueuse/core', 'gsap'],
   },
 })
