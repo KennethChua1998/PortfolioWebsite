@@ -16,17 +16,24 @@ const SESSION_KEY = 'visit-counted'
 
 const count = ref(null)
 
+const read = async url => {
+  const res = await fetch(url)
+  if (!res.ok) return null
+  const data = await res.json()
+  return typeof data.count === 'number' ? data.count : null
+}
+
 onMounted(async () => {
   try {
-    // Count each browser session once; reloads and dev mode only read
+    // Count each browser session once; reloads and dev mode only read.
+    // The plain read 400s if the counter doesn't exist yet, so fall back
+    // to /up (which creates-and-reads) before giving up.
     const shouldIncrement = !import.meta.env.DEV && !sessionStorage.getItem(SESSION_KEY)
-    const res = await fetch(shouldIncrement ? `${COUNTER_URL}/up` : COUNTER_URL)
-    if (!res.ok) return
-    const data = await res.json()
-    if (typeof data.count === 'number') {
-      count.value = data.count
-      if (shouldIncrement) sessionStorage.setItem(SESSION_KEY, '1')
-    }
+    let value = await read(shouldIncrement ? `${COUNTER_URL}/up` : COUNTER_URL)
+    if (value === null && !shouldIncrement) value = await read(`${COUNTER_URL}/up`)
+    if (value === null) return
+    count.value = value
+    if (shouldIncrement) sessionStorage.setItem(SESSION_KEY, '1')
   } catch {
     // counter is decorative — stay hidden if the API is unreachable
   }
