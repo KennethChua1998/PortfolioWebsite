@@ -22,7 +22,7 @@ export const projects = [
       'Stock screener filtering ~6,800 US equities with paper-traded positions. Runs on Cloud Run, routinely seeking alpha.',
     technologies: ['Python', 'pandas', 'Google Cloud Run', 'Cloud Scheduler', 'Email Reports'],
     githubUrl: null,
-    liveUrl: null,
+    liveUrl: 'https://divitiae.kennethchua.com',
     slidesUrl: 'https://docs.google.com/presentation/d/1JwBun72z_uREuiiP7Aw77dib2pLA1ZuS/edit?usp=sharing&rtpof=true&sd=true',
     imageUrl: '/project_screenshot/divitiae.png',
     status: 'Hobby Project',
