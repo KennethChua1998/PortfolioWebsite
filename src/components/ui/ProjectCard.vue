@@ -137,21 +137,20 @@ const imageFailed = ref(false)
   /* 1fr row absorbs remaining space — keeps description tight to title */
 }
 
-/* Warm desaturated filter for consistent image tone */
+/* Full colour by default; gentle brightness lift on hover */
 .project-img {
-  filter: saturate(0.6) brightness(0.9) sepia(0.15);
+  filter: brightness(1);
 }
 .project-img-overlay {
   background: linear-gradient(
     to bottom,
-    rgba(40, 35, 25, 0.12) 0%,
-    rgba(40, 35, 25, 0.25) 100%
+    rgba(40, 35, 25, 0) 0%,
+    rgba(40, 35, 25, 0.18) 100%
   );
   opacity: 1;
 }
-/* Lift filter on hover to reveal original */
 .group:hover .project-img {
-  filter: saturate(1) brightness(1) sepia(0);
+  filter: brightness(1.05);
 }
 .group:hover .project-img-overlay {
   opacity: 0;
