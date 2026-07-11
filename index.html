@@ -47,10 +47,16 @@
         "addressRegion": "Penang",
         "addressCountry": "MY"
       },
-      "hasCredential": {
-        "@type": "EducationalOccupationalCredential",
-        "name": "Google Cloud Professional Developer"
-      },
+      "hasCredential": [
+        {
+          "@type": "EducationalOccupationalCredential",
+          "name": "Google Cloud Professional Cloud Architect"
+        },
+        {
+          "@type": "EducationalOccupationalCredential",
+          "name": "Google Cloud Professional Cloud Developer"
+        }
+      ],
       "sameAs": [
         "https://www.linkedin.com/in/kenneth-chua/",
         "https://github.com/kennethchua1998"
@@ -65,22 +71,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   </head>
   <body>
-    <!-- Static fallback for crawlers that don't run JS; Vue replaces it on mount. Keep in sync with src/data/personal.js. -->
-    <div id="app">
-      <main style="max-width: 42rem; margin: 0 auto; padding: 4rem 1.5rem">
-        <h1>Kenneth Chua</h1>
-        <p>Google Cloud Specialist &amp; Full Stack Developer based in Penang, Malaysia.</p>
-        <p>
-          Currently at PointStar, designing and implementing full stack solutions on Google Cloud
-          Platform. Focused on CI/CD automation, AI/ML integration, and building scalable
-          API-driven applications. Google Cloud Professional Developer certified.
-        </p>
-        <p>
-          <a href="https://www.linkedin.com/in/kenneth-chua/">LinkedIn</a> -
-          <a href="https://github.com/kennethchua1998">GitHub</a>
-        </p>
-      </main>
-    </div>
+    <div id="app"><!--seo-fallback--></div>
     <script type="module" src="/src/main.js"></script>
   </body>
 </html>
