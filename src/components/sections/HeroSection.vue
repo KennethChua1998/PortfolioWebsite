@@ -19,7 +19,7 @@
             :class="{ 'hero-visible': isLoaded }"
             style="transition-delay: 0.25s"
           >
-            {{ heroData.headline }}<br />
+            <span class="sr-only">{{ heroData.name }}: </span>{{ heroData.headline }}<br />
             <span class="italic text-gold">{{ heroData.headlineAccent }}</span>
           </h1>
           <p
