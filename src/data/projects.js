@@ -1,5 +1,21 @@
 export const projects = [
   {
+    id: 5,
+    title: 'Erlang AI Vision',
+    description:
+      'Hackathon project turning passive CCTV into intelligent surveillance. ESP32 cameras detect locally with YOLO, then escalate ambiguous events to Qwen in the cloud for natural-language verification, so only meaningful, explained alerts reach you.',
+    technologies: ['Flutter', 'FastAPI', 'YOLO', 'Qwen', 'ESP32', 'Alibaba Cloud'],
+    githubUrl: null,
+    liveUrl: 'https://erlang-vision.duckdns.org/',
+    slidesUrl: 'https://medium.com/@nicholasooi10/from-passive-cctv-to-intelligent-surveillance-agents-building-erlang-ai-vision-with-qwen-and-ffd1d16ebfb1',
+    slidesLabel: 'Write-up',
+    imageUrl: '/project_screenshot/erlang_vision.webp',
+    status: 'Hackathon',
+    year: '2026',
+    aiAssisted: true,
+    aiLabel: 'Agentic Coding',
+  },
+  {
     id: 1,
     title: 'NoteRx',
     description:
@@ -13,7 +29,7 @@ export const projects = [
     status: 'Hobby Project',
     year: '2026',
     aiAssisted: true,
-    aiLabel: 'Autonomous Coding',
+    aiLabel: 'Agentic Coding',
   },
   {
     id: 2,
@@ -24,11 +40,11 @@ export const projects = [
     githubUrl: null,
     liveUrl: 'https://divitiae.kennethchua.com',
     slidesUrl: 'https://docs.google.com/presentation/d/1JwBun72z_uREuiiP7Aw77dib2pLA1ZuS/edit?usp=sharing&rtpof=true&sd=true',
-    imageUrl: '/project_screenshot/divitiae.png',
+    imageUrl: '/project_screenshot/divitiae.webp',
     status: 'Hobby Project',
     year: '2026',
     aiAssisted: true,
-    aiLabel: 'Autonomous Coding',
+    aiLabel: 'Agentic Coding',
   },
   {
     id: 3,
@@ -39,10 +55,11 @@ export const projects = [
     githubUrl: 'https://github.com/KennethChua1998/Portfolio-Website',
     liveUrl: 'https://kennethchua.com',
     slidesUrl: null,
-    imageUrl: '/project_screenshot/portfolio_website.png',
+    imageUrl: '/project_screenshot/portfolio_website.webp',
     status: 'Hobby Project',
     year: '2025',
     aiAssisted: true,
+    aiLabel: 'Agentic Coding',
   },
   {
     id: 4,
@@ -53,7 +70,7 @@ export const projects = [
     githubUrl: 'https://github.com/KennethChua1998/BursaMalaysiaWebScrapper',
     liveUrl: null,
     slidesUrl: null,
-    imageUrl: '/project_screenshot/bursa_scrapper.png',
+    imageUrl: '/project_screenshot/bursa_scrapper.webp',
     status: 'Hobby Project',
     year: '2023',
     aiAssisted: false,

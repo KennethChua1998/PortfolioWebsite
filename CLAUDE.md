@@ -36,3 +36,7 @@ GitHub Actions (`.github/workflows/cicd.yml`): every push runs lint + tests + bu
 ## Deferred upgrades
 
 ESLint 10 (flat config), Tailwind 4, and Vite 8 majors are intentionally deferred — don't bump them casually.
+
+## Deferred features
+
+- **Projects: dedicated page past ~6 entries.** The Projects section renders every `projects.js` entry into one `lg:grid-cols-3` grid. This scales fine mechanically, but once the list grows beyond ~6 the single-section layout stops reading well. At that point, move projects to a dedicated page (or add pagination / "show more"). This introduces routing (currently no router) — treat it as a real feature, not a tweak. Also cap the reveal stagger (`index * 150ms` in `ProjectsSection.vue`) so late cards don't lag.

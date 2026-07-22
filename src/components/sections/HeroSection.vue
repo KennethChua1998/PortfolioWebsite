@@ -51,7 +51,7 @@
         >
           <div class="w-72 md:w-96 aspect-[7/6] rounded-lg overflow-hidden shadow-tincture-lg">
             <img
-              src="/profile_pic.png"
+              src="/profile_pic.webp"
               :alt="heroData.name"
               class="profile-img w-full h-full object-cover"
             />

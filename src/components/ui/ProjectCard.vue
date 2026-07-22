@@ -81,6 +81,17 @@
       </a>
 
       <a
+        v-if="project.slidesUrl"
+        :href="project.slidesUrl"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="btn-tertiary text-xs"
+      >
+        <component :is="project.slidesLabel ? FileText : Presentation" :size="14" class="inline mr-1" />
+        {{ project.slidesLabel || 'Slides' }}
+      </a>
+
+      <a
         v-if="project.liveUrl"
         :href="project.liveUrl"
         target="_blank"
@@ -89,17 +100,6 @@
       >
         <ExternalLink :size="14" class="inline mr-1" />
         Live Demo
-      </a>
-
-      <a
-        v-if="project.slidesUrl"
-        :href="project.slidesUrl"
-        target="_blank"
-        rel="noopener noreferrer"
-        class="btn-tertiary text-xs"
-      >
-        <Presentation :size="14" class="inline mr-1" />
-        Slides
       </a>
 
       <span
@@ -114,7 +114,7 @@
 
 <script setup>
 import { ref } from 'vue'
-import { Code, Github, ExternalLink, Presentation, ShieldAlert } from 'lucide-vue-next'
+import { Code, Github, ExternalLink, Presentation, FileText, ShieldAlert } from 'lucide-vue-next'
 
 defineProps({
   project: {
